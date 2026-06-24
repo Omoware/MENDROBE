@@ -179,6 +179,9 @@
     <button class="nav-tab" id="tab-fabric" onclick="switchGame('fabric')">
       <i class="ti ti-flask"></i> Fabric
     </button>
+    <button class="nav-tab" id="tab-measure" onclick="switchGame('measure')">
+      <i class="ti ti-ruler-measure"></i> Measure
+    </button>
   </div>
 </nav>
 
@@ -196,6 +199,9 @@
     <div class="hero-game-pill" id="pill-fabric" onclick="switchGame('fabric')">
       <i class="ti ti-flask"></i> Fabric Quiz
     </div>
+    <div class="hero-game-pill" id="pill-measure" onclick="switchGame('measure')">
+      <i class="ti ti-ruler-measure"></i> Measurement
+    </div>
   </div>
 </div>
 
@@ -208,6 +214,9 @@
   </div>
   <div class="screen" id="screen-fabric">
     <div id="fabric-main"></div>
+  </div>
+  <div class="screen" id="screen-measure">
+    <div id="measure-main"></div>
   </div>
 </div>
 
@@ -539,7 +548,7 @@ let TS = { clientIdx:0, checked:{}, score:0, xp:0, level:1, timerLeft:90, timerM
 let FQ = { qIdx:0, score:0, streak:0, maxStreak:0, answered:false, selected:null, correct:0, phase:"play" };
 let timerInterval = null;
 
-const GAMES = ["style","tailor","fabric"];
+const GAMES = ["style","tailor","fabric","measure"];
 
 // ─── NAVIGATION ───────────────────────────────────────────────────────────────
 
@@ -551,7 +560,8 @@ function switchGame(g) {
   });
   if (g==="style") renderStyle();
   else if (g==="tailor") renderTailor();
-  else renderFabric();
+  else if (g==="fabric") renderFabric();
+  else renderMeasurement();
 }
 
 // ─── STYLE GAME ───────────────────────────────────────────────────────────────
@@ -934,5 +944,6 @@ function resetFabric() {
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 renderStyle();
 </script>
+<script src="measurement-game.js"></script>
 </body>
 </html>

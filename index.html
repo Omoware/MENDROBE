@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MENDROBE — Mendall Fitting Room Games</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,6 +28,7 @@
     --red: #E24B4A;
     --red-light: #FCEBEB;
     --amber: #EF9F27;
+    --amber-light: #FEF3DC;
     --radius: 10px;
     --radius-lg: 14px;
     --shadow: 0 1px 3px rgba(83,74,183,0.08), 0 0 0 0.5px rgba(83,74,183,0.1);
@@ -35,132 +36,132 @@
   html { font-size: 16px; }
   body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  /* NAV */
   .nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-  .nav-brand { font-size: 17px; font-weight: 600; color: var(--purple); letter-spacing: -0.02em; }
-  .nav-brand span { color: var(--text2); font-weight: 400; }
-  .nav-tabs { display: flex; gap: 4px; }
-  .nav-tab { padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text2); transition: all 0.15s; }
+  .nav-brand { font-size: 17px; font-weight: 700; color: var(--purple); letter-spacing: -0.03em; }
+  .nav-brand span { color: var(--text3); font-weight: 400; font-size: 13px; margin-left: 4px; }
+  .nav-tabs { display: flex; gap: 3px; }
+  .nav-tab { padding: 6px 11px; border-radius: 8px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text2); transition: all 0.15s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
   .nav-tab:hover { background: var(--purple-light); color: var(--purple); }
   .nav-tab.active { background: var(--purple); color: white; }
 
-  /* HERO */
-  .hero { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); padding: 3rem 1.5rem 2.5rem; text-align: center; }
-  .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); color: white; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 1rem; }
-  .hero h1 { font-size: clamp(28px, 6vw, 42px); font-weight: 600; color: white; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 0.75rem; }
-  .hero p { font-size: 15px; color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 2rem; line-height: 1.6; }
-  .hero-games { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .hero-game-pill { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 13px; padding: 8px 18px; border-radius: 99px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 7px; }
+  .hero { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); padding: 2.5rem 1.5rem 2rem; text-align: center; }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); color: white; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 0.875rem; }
+  .hero h1 { font-size: clamp(24px, 5.5vw, 40px); font-weight: 700; color: white; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 0.625rem; }
+  .hero p { font-size: 14px; color: rgba(255,255,255,0.72); max-width: 460px; margin: 0 auto 1.75rem; line-height: 1.65; }
+  .hero-games { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .hero-game-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: white; font-size: 12px; padding: 7px 16px; border-radius: 99px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 6px; font-weight: 500; }
   .hero-game-pill:hover, .hero-game-pill.active { background: white; color: var(--purple); }
 
-  /* MAIN LAYOUT */
-  .main { max-width: 740px; margin: 0 auto; padding: 2rem 1rem 4rem; }
-
-  /* SCREENS */
+  .main { max-width: 720px; margin: 0 auto; padding: 1.75rem 1rem 4rem; }
   .screen { display: none; }
   .screen.active { display: block; }
 
-  /* STAT ROW */
-  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
-  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.875rem 1rem; }
-  .stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 3px; }
-  .stat-value { font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1.25rem; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; }
+  .stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px; }
+  .stat-value { font-size: 21px; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
 
-  /* BRIEF CARD */
-  .brief-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem; display: flex; gap: 1rem; }
-  .client-avatar { width: 54px; height: 54px; border-radius: 50%; background: var(--purple-light); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+  .brief-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.125rem; margin-bottom: 1.125rem; display: flex; gap: 1rem; }
+  .client-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--purple-light); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
   .brief-meta { font-size: 11px; color: var(--text3); margin-bottom: 3px; font-weight: 500; }
-  .brief-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em; }
+  .brief-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 5px; letter-spacing: -0.01em; }
   .brief-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
-  .brief-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-  .tag { font-size: 11px; padding: 3px 10px; border-radius: 99px; background: var(--purple-light); color: var(--purple); font-weight: 500; }
+  .brief-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 9px; }
+  .tag { font-size: 10px; padding: 3px 9px; border-radius: 99px; background: var(--purple-light); color: var(--purple); font-weight: 500; }
 
-  /* OUTFIT SLOTS */
-  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
-  .outfit-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.25rem; }
-  .outfit-slot { background: var(--surface2); border: 1.5px dashed var(--border2); border-radius: var(--radius); padding: 12px 6px; text-align: center; min-height: 82px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.15s; }
+  .section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 9px; }
+  .outfit-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 1.125rem; }
+  .outfit-slot { background: var(--surface2); border: 1.5px dashed var(--border2); border-radius: var(--radius); padding: 10px 5px; text-align: center; min-height: 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.15s; }
   .outfit-slot.filled { border-style: solid; border-color: var(--border); background: var(--surface); }
-  .slot-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; }
+  .slot-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; }
 
-  /* GARMENT GRID */
-  .garment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; margin-bottom: 14px; }
-  .garment-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 6px; text-align: center; cursor: pointer; transition: all 0.12s; user-select: none; }
+  .garment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 7px; margin-bottom: 12px; }
+  .garment-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 9px 5px; text-align: center; cursor: pointer; transition: all 0.12s; user-select: none; }
   .garment-item:hover { border-color: var(--purple-mid); background: var(--purple-light); }
   .garment-item.selected { border: 2px solid var(--purple); background: var(--purple-light); }
   .garment-item.wrong { border: 2px solid var(--red); background: var(--red-light); animation: shake 0.3s; }
-  .garment-item.correct-flash { border: 2px solid var(--green); background: var(--green-light); }
-  .garment-icon { font-size: 24px; margin-bottom: 4px; }
-  .garment-name { font-size: 11px; color: var(--text); font-weight: 500; }
-  .garment-detail { font-size: 10px; color: var(--text3); margin-top: 1px; }
+  .garment-icon { font-size: 22px; margin-bottom: 3px; }
+  .garment-name { font-size: 10px; color: var(--text); font-weight: 500; }
+  .garment-detail { font-size: 9px; color: var(--text3); margin-top: 1px; }
 
-  /* FEEDBACK */
-  .feedback-banner { border-radius: var(--radius); padding: 12px 16px; margin-bottom: 1.25rem; font-size: 13px; line-height: 1.6; display: none; }
+  .feedback-banner { border-radius: var(--radius); padding: 11px 14px; margin-bottom: 1.125rem; font-size: 13px; line-height: 1.6; display: none; }
   .feedback-banner.success { background: var(--green-light); color: var(--green-dark); display: block; border-left: 3px solid var(--green); }
   .feedback-banner.error { background: var(--red-light); color: #791F1F; display: block; border-left: 3px solid var(--red); }
 
-  /* BUTTONS */
   .btn-row { display: flex; gap: 8px; margin-top: 1rem; }
-  .btn { padding: 9px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid var(--border2); background: transparent; color: var(--text); transition: all 0.12s; font-family: inherit; }
+  .btn { padding: 9px 18px; border-radius: var(--radius); font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border2); background: transparent; color: var(--text); transition: all 0.12s; font-family: inherit; }
   .btn:hover { background: var(--surface2); }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .btn-primary { background: var(--purple); color: white; border-color: var(--purple); }
-  .btn-primary:hover { background: var(--purple-dark); border-color: var(--purple-dark); }
-  .btn-sm { padding: 6px 14px; font-size: 13px; }
+  .btn-primary:hover:not(:disabled) { background: var(--purple-dark); border-color: var(--purple-dark); }
 
-  /* TAILOR */
-  .timer-bar-wrap { background: var(--surface2); border-radius: 99px; height: 6px; margin-bottom: 1.25rem; overflow: hidden; border: 1px solid var(--border); }
+  .timer-bar-wrap { background: var(--surface2); border-radius: 99px; height: 6px; margin-bottom: 1.125rem; overflow: hidden; border: 1px solid var(--border); }
   .timer-bar { height: 100%; border-radius: 99px; background: var(--purple); transition: width 0.5s linear, background 0.3s; }
-  .tailor-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+  .tailor-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.125rem; margin-bottom: 1rem; }
   .task-list { list-style: none; }
-  .task-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .task-item { display: flex; align-items: center; gap: 9px; padding: 9px 0; border-bottom: 1px solid var(--border); }
   .task-item:last-child { border-bottom: none; }
-  .task-check { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border2); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.15s; font-size: 13px; color: transparent; }
+  .task-check { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border2); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.15s; font-size: 12px; color: transparent; }
   .task-check.done { background: var(--green); border-color: var(--green); color: white; }
   .task-text { font-size: 13px; color: var(--text); flex: 1; line-height: 1.5; }
   .task-text.done { text-decoration: line-through; color: var(--text3); }
-  .task-pts { font-size: 11px; color: var(--purple); font-weight: 600; }
-  .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.25rem; }
-  .tool-btn { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 6px; text-align: center; cursor: pointer; transition: all 0.12s; }
+  .task-pts { font-size: 11px; color: var(--purple); font-weight: 600; white-space: nowrap; }
+  .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 1.125rem; }
+  .tool-btn { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 5px; text-align: center; cursor: pointer; transition: all 0.12s; }
   .tool-btn:hover { border-color: var(--purple-mid); background: var(--purple-light); }
   .tool-btn.active-tool { border: 2px solid var(--purple); background: var(--purple-light); }
-  .tool-icon { font-size: 22px; color: var(--purple); margin-bottom: 4px; }
-  .tool-name { font-size: 11px; color: var(--text); font-weight: 500; }
-  .mannequin-area { background: var(--surface2); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; margin-bottom: 1.25rem; border: 1px solid var(--border); }
-  .level-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 4px 12px; border-radius: 99px; background: var(--purple-light); color: var(--purple); font-weight: 600; }
-  .xp-bar-wrap { background: var(--surface2); border-radius: 99px; height: 7px; margin: 8px 0 4px; overflow: hidden; border: 1px solid var(--border); }
+  .tool-icon { font-size: 20px; color: var(--purple); margin-bottom: 3px; }
+  .tool-name { font-size: 10px; color: var(--text); font-weight: 500; }
+  .mannequin-area { background: var(--surface2); border-radius: var(--radius-lg); padding: 1.25rem; text-align: center; margin-bottom: 1.125rem; border: 1px solid var(--border); }
+  .level-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 4px 11px; border-radius: 99px; background: var(--purple-light); color: var(--purple); font-weight: 600; }
+  .xp-bar-wrap { background: var(--surface2); border-radius: 99px; height: 6px; margin: 7px 0 3px; overflow: hidden; border: 1px solid var(--border); }
   .xp-bar { height: 100%; border-radius: 99px; background: var(--purple); transition: width 0.4s ease; }
-  .client-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .diff-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .client-header { display: flex; align-items: center; gap: 11px; margin-bottom: 11px; }
+  .diff-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
   .diff-easy { background: var(--green); }
   .diff-medium { background: var(--amber); }
   .diff-hard { background: var(--red); }
 
-  /* RESULT */
-  .result-screen { text-align: center; padding: 3rem 1rem; }
-  .result-icon { font-size: 60px; margin-bottom: 1rem; }
-  .result-title { font-size: 26px; font-weight: 600; color: var(--text); margin-bottom: 6px; letter-spacing: -0.02em; }
-  .result-stars { font-size: 34px; letter-spacing: 6px; margin-bottom: 1rem; }
-  .result-sub { font-size: 14px; color: var(--text2); line-height: 1.6; max-width: 420px; margin: 0 auto 1.75rem; }
+  /* FABRIC QUIZ */
+  .fabric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.125rem; text-align: center; }
+  .fabric-swatch { width: 90px; height: 90px; border-radius: 12px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 42px; border: 1px solid var(--border); }
+  .fabric-clue { font-size: 14px; color: var(--text2); line-height: 1.7; max-width: 460px; margin: 0 auto; }
+  .fabric-hint { font-size: 12px; color: var(--text3); margin-top: 8px; font-style: italic; }
+  .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 1.25rem; }
+  .quiz-option { background: var(--surface); border: 1.5px solid var(--border2); border-radius: var(--radius); padding: 12px 14px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--text); transition: all 0.12s; text-align: left; font-family: inherit; }
+  .quiz-option:hover:not(:disabled) { border-color: var(--purple-mid); background: var(--purple-light); color: var(--purple); }
+  .quiz-option.correct { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
+  .quiz-option.wrong { border-color: var(--red); background: var(--red-light); color: #791F1F; }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-fact { background: var(--purple-light); border: 1px solid var(--border2); border-radius: var(--radius); padding: 12px 14px; margin-top: 1rem; font-size: 13px; color: var(--purple-dark); line-height: 1.6; display: none; }
+  .quiz-fact.show { display: block; }
+  .streak-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 3px 10px; border-radius: 99px; background: var(--amber-light); color: #8B5E00; font-weight: 600; }
 
-  /* INTRO SCREEN */
-  .intro { text-align: center; padding: 2.5rem 1rem; }
-  .intro-icon { font-size: 52px; margin-bottom: 1rem; }
-  .intro h2 { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
-  .intro p { font-size: 14px; color: var(--text2); line-height: 1.7; max-width: 440px; margin: 0 auto 1.75rem; }
+  .result-screen { text-align: center; padding: 2.5rem 1rem; }
+  .result-icon { font-size: 54px; margin-bottom: 0.875rem; }
+  .result-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 5px; letter-spacing: -0.02em; }
+  .result-stars { font-size: 30px; letter-spacing: 5px; margin-bottom: 0.875rem; }
+  .result-sub { font-size: 14px; color: var(--text2); line-height: 1.6; max-width: 400px; margin: 0 auto 1.5rem; }
+  .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 360px; margin: 0 auto 1.5rem; }
+  .result-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem; }
+  .result-stat-val { font-size: 22px; font-weight: 700; color: var(--purple); }
+  .result-stat-lbl { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
 
-  /* CATEGORY LABEL */
-  .cat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; font-weight: 600; }
+  .cat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; font-weight: 600; }
 
   @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
   @keyframes pop { 0%{transform:scale(0.9);opacity:0} 100%{transform:scale(1);opacity:1} }
   .pop { animation: pop 0.25s ease forwards; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
 
   @media (max-width: 520px) {
     .outfit-slots { grid-template-columns: repeat(2, 1fr); }
     .tool-grid { grid-template-columns: repeat(2, 1fr); }
     .stat-value { font-size: 18px; }
-    .hero h1 { font-size: 26px; }
+    .hero h1 { font-size: 24px; }
     .nav-brand span { display: none; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>
 </head>
@@ -175,19 +176,25 @@
     <button class="nav-tab" id="tab-tailor" onclick="switchGame('tailor')">
       <i class="ti ti-scissors"></i> Tailor
     </button>
+    <button class="nav-tab" id="tab-fabric" onclick="switchGame('fabric')">
+      <i class="ti ti-flask"></i> Fabric
+    </button>
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-tag">Mendall Fitting Room</div>
   <h1>Learn to dress well.<br>By playing.</h1>
-  <p>Two games. Real Lagos occasions. Actual tailoring knowledge — taught through play, not lectures.</p>
+  <p>Three games. Real Lagos occasions. Actual tailoring knowledge — taught through play, not lectures.</p>
   <div class="hero-games">
     <div class="hero-game-pill active" id="pill-style" onclick="switchGame('style')">
       <i class="ti ti-hanger"></i> Style the Client
     </div>
     <div class="hero-game-pill" id="pill-tailor" onclick="switchGame('tailor')">
       <i class="ti ti-scissors"></i> Tailor's Table
+    </div>
+    <div class="hero-game-pill" id="pill-fabric" onclick="switchGame('fabric')">
+      <i class="ti ti-flask"></i> Fabric Quiz
     </div>
   </div>
 </div>
@@ -199,9 +206,14 @@
   <div class="screen" id="screen-tailor">
     <div id="tailor-main"></div>
   </div>
+  <div class="screen" id="screen-fabric">
+    <div id="fabric-main"></div>
+  </div>
 </div>
 
 <script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
 const STYLE_CLIENTS = [
   {
     id:1, name:"Amara O.", event:"Garden Wedding Guest", avatar:"👩🏾", difficulty:"easy",
@@ -219,7 +231,7 @@ const STYLE_CLIENTS = [
     tip:"In finance interviews, fit beats fabric every time. A well-tailored suit in navy or charcoal signals seriousness. Avoid loud patterns or overly trendy cuts.",
     requiredTypes:["jacket","trousers","shoes","accessory"],
     correct:{ jacket:["Navy suit jacket","Charcoal blazer"], trousers:["Navy suit trousers","Charcoal trousers","Grey dress trousers"], shoes:["Black oxford shoes","Brown derby shoes"], accessory:["Classic tie","Pocket square","Leather belt"] },
-    wrong:{ jacket:["Denim jacket","Bomber jacket","Sequin blazer"], trousers:["Cargo trousers","Slim joggers","Ripped jeans"], shoes:["Chunky trainers","Loafers with tassels","White sneakers"], accessory:["Bucket hat","Sports watch","Colourful suspenders"] }
+    wrong:{ jacket:["Denim jacket","Bomber jacket","Sequin blazer"], trousers:["Cargo trousers","Slim joggers","Ripped jeans"], shoes:["Chunky trainers","White sneakers","Loafers with tassels"], accessory:["Bucket hat","Sports watch","Colourful suspenders"] }
   },
   {
     id:3, name:"Chioma B.", event:"Beach Party — Elegushi", avatar:"👩🏽", difficulty:"medium",
@@ -238,6 +250,42 @@ const STYLE_CLIENTS = [
     requiredTypes:["outer","inner","shoes","accessory"],
     correct:{ outer:["Agbada (3-piece)","Senator suit"], inner:["Fitted buba","Plain kaftan top"], shoes:["Leather mules","Embroidered slippers","Babba riga shoes"], accessory:["Fila cap","Coral beads","Embroidered cap"] },
     wrong:{ outer:["Suit jacket","Bomber jacket","Denim jacket"], inner:["T-shirt","Polo shirt","Vest"], shoes:["Running shoes","Chelsea boots","Flip-flops"], accessory:["Baseball cap","Snapback","Western tie"] }
+  },
+  {
+    id:5, name:"Ngozi F.", event:"Corporate Dinner — Eko Hotel", avatar:"👩🏿", difficulty:"medium",
+    desc:"Black-tie-adjacent corporate dinner hosted by a multinational on the 18th floor of Eko Hotel. Smart, polished, and memorable — but office-appropriate.",
+    tags:["corporate","evening formal","black-tie-adjacent","VI"],
+    tip:"Corporate dinners at Eko Hotel sit between business formal and black tie. A floor-length gown or tailored jumpsuit in a jewel tone is ideal. Avoid overly revealing cuts — gravitas matters.",
+    requiredTypes:["top","bottom_or_dress","shoes","accessory"],
+    correct:{ top:["Silk blouse","Structured blazer top"], bottom_or_dress:["Floor-length evening dress","Tailored jumpsuit","Pencil gown"], shoes:["Stiletto heels","Court heels"], accessory:["Statement earrings","Satin clutch","Delicate necklace"] },
+    wrong:{ top:["Crop top","Crochet coverup","Thick knit jumper"], bottom_or_dress:["Wrap skirt","Mini skirt","Denim skirt"], shoes:["Beaded slippers","Trainers","Flat strappy sandals"], accessory:["Beach tote","Baseball cap","Backpack"] }
+  },
+  {
+    id:6, name:"Kolade M.", event:"Creative Industry Networking", avatar:"👨🏽", difficulty:"hard",
+    desc:"Evening mixer at a creative agency in Yaba. Fashion-adjacent crowd — designers, photographers, brand managers. Looking sharp matters. Looking generic is a fail.",
+    tags:["creative","smart-casual","Yaba","statement"],
+    tip:"Creative industry events reward intentional dressing. Mixing textures — a linen shirt with tailored trousers and statement sneakers — reads sophisticated and current. Avoid suits that say 'bank job interview'.",
+    requiredTypes:["top","trousers","shoes","accessory"],
+    correct:{ top:["Linen shirt","Printed shirt","Smart turtleneck"], trousers:["Tailored wide-leg trousers","Cropped chinos","Navy dress trousers"], shoes:["Premium white sneakers","Loafers","Derby shoes"], accessory:["Statement watch","Tote bag","Minimal chain"] },
+    wrong:{ top:["Plain T-shirt","Formal suit shirt","Polo shirt"], trousers:["Cargo trousers","Slim joggers","Ripped jeans"], shoes:["Chunky trainers","Flip-flops","Running shoes"], accessory:["Briefcase","Sports watch","Backpack"] }
+  },
+  {
+    id:7, name:"Adaeze K.", event:"Church Service — Smart Casual", avatar:"👩🏾", difficulty:"easy",
+    desc:"Sunday service at a Pentecostal church on the Mainland. Smart-casual, modest, and put-together. Colour is fine. The congregation is fashion-aware.",
+    tags:["church","modest","smart-casual","Sunday"],
+    tip:"Church dressing on the Mainland sits firmly at smart-casual: knee-length or longer, modest neckline, tidy shoes. African print or solid-colour midi dresses work beautifully. Avoid anything revealing.",
+    requiredTypes:["top","bottom_or_dress","shoes","accessory"],
+    correct:{ top:["Peplum blouse","Lace top","Fitted kaftan"], bottom_or_dress:["Midi skirt","Ankara midi dress","A-line dress"], shoes:["Block-heel sandals","Court heels","Flat pumps"], accessory:["Pearl earrings","Gold bracelet","Small handbag"] },
+    wrong:{ top:["Crop top","Off-shoulder blouse","Strapless bandeau"], bottom_or_dress:["Mini skirt","Shorts","Leather leggings"], shoes:["Trainers","Combat boots","Flip-flops"], accessory:["Chunky chain","Baseball cap","Backpack"] }
+  },
+  {
+    id:8, name:"Femi O.", event:"Black-Tie Gala", avatar:"👨🏾", difficulty:"hard",
+    desc:"Annual charity gala at the Federal Palace Hotel. White-tie optional, black-tie required. This is Lagos high society — every detail will be noticed.",
+    tags:["black-tie","formal","Lagos high society","gala"],
+    tip:"A well-tailored black tuxedo with a white dress shirt and bow tie is the foundation. Patent leather shoes and a pocket square complete the look. Avoid standard suits — the brief says black-tie.",
+    requiredTypes:["jacket","trousers","shoes","accessory"],
+    correct:{ jacket:["Black tuxedo jacket","Midnight blue dinner jacket"], trousers:["Tuxedo trousers","Black dress trousers with satin stripe"], shoes:["Patent leather oxford","Black formal loafers"], accessory:["Bow tie","White pocket square","Cufflinks"] },
+    wrong:{ jacket:["Navy suit jacket","Charcoal blazer","Denim jacket"], trousers:["Grey dress trousers","Cargo trousers","Slim joggers"], shoes:["White sneakers","Chelsea boots","Brown derby shoes"], accessory:["Classic tie","Sports watch","Leather belt"] }
   }
 ];
 
@@ -252,6 +300,18 @@ const GARMENT_DATA = {
   "Formal blouse":{slot:"top",icon:"👔",detail:"Polyester · stiff"},
   "Thick knit jumper":{slot:"top",icon:"🧥",detail:"Wool · warm"},
   "Suit jacket":{slot:"top",icon:"🧥",detail:"Wool · formal"},
+  "Silk blouse":{slot:"top",icon:"👚",detail:"Silk · elegant"},
+  "Structured blazer top":{slot:"top",icon:"🧥",detail:"Poly blend · formal"},
+  "Linen shirt":{slot:"top",icon:"👔",detail:"Linen · breathable"},
+  "Printed shirt":{slot:"top",icon:"👔",detail:"Cotton · statement"},
+  "Smart turtleneck":{slot:"top",icon:"👕",detail:"Jersey · refined"},
+  "Plain T-shirt":{slot:"top",icon:"👕",detail:"Cotton · casual"},
+  "Formal suit shirt":{slot:"top",icon:"👔",detail:"Poplin · stiff"},
+  "Polo shirt":{slot:"top",icon:"👕",detail:"Pique · sporty"},
+  "Peplum blouse":{slot:"top",icon:"👚",detail:"Chiffon · formal"},
+  "Lace top":{slot:"top",icon:"👚",detail:"Lace · elegant"},
+  "Fitted kaftan":{slot:"top",icon:"🥻",detail:"Cotton · modest"},
+  "Strapless bandeau":{slot:"top",icon:"🩱",detail:"Jersey · revealing"},
   "A-line skirt":{slot:"bottom_or_dress",icon:"👗",detail:"Chiffon · floaty"},
   "Palazzo pants":{slot:"bottom_or_dress",icon:"👖",detail:"Linen · wide-leg"},
   "Mini skirt":{slot:"bottom_or_dress",icon:"🩲",detail:"Denim · casual"},
@@ -263,9 +323,17 @@ const GARMENT_DATA = {
   "Pencil skirt":{slot:"bottom_or_dress",icon:"👗",detail:"Poly · structured"},
   "Suit trousers":{slot:"bottom_or_dress",icon:"👖",detail:"Wool · formal"},
   "Leather leggings":{slot:"bottom_or_dress",icon:"🩱",detail:"PU · tight"},
+  "Floor-length evening dress":{slot:"bottom_or_dress",icon:"👗",detail:"Silk · formal"},
+  "Tailored jumpsuit":{slot:"bottom_or_dress",icon:"🧥",detail:"Crepe · chic"},
+  "Pencil gown":{slot:"bottom_or_dress",icon:"👗",detail:"Jersey · sleek"},
+  "Denim skirt":{slot:"bottom_or_dress",icon:"👗",detail:"Denim · casual"},
+  "Shorts":{slot:"bottom_or_dress",icon:"🩲",detail:"Cotton · very casual"},
+  "Midi skirt":{slot:"bottom_or_dress",icon:"👗",detail:"Satin · modest"},
+  "Ankara midi dress":{slot:"bottom_or_dress",icon:"👗",detail:"Ankara · cultural"},
+  "A-line dress":{slot:"bottom_or_dress",icon:"👗",detail:"Chiffon · modest"},
   "Block-heel sandals":{slot:"shoes",icon:"👡",detail:"Heel: 5cm · stable"},
   "Wedge sandals":{slot:"shoes",icon:"👠",detail:"Wedge · garden-safe"},
-  "Stiletto heels":{slot:"shoes",icon:"👠",detail:"Heel: 10cm · risky"},
+  "Stiletto heels":{slot:"shoes",icon:"👠",detail:"Heel: 10cm · sharp"},
   "Trainers":{slot:"shoes",icon:"👟",detail:"Canvas · casual"},
   "Combat boots":{slot:"shoes",icon:"🥾",detail:"Leather · heavy"},
   "Flat strappy sandals":{slot:"shoes",icon:"🩴",detail:"Flat · sand-ready"},
@@ -274,6 +342,13 @@ const GARMENT_DATA = {
   "Court heels":{slot:"shoes",icon:"👠",detail:"Heel: 8cm · formal"},
   "Knee-high boots":{slot:"shoes",icon:"🥾",detail:"Leather · hot"},
   "Oxford shoes":{slot:"shoes",icon:"👞",detail:"Leather · formal"},
+  "Flat pumps":{slot:"shoes",icon:"👡",detail:"Flat · church-ready"},
+  "Premium white sneakers":{slot:"shoes",icon:"👟",detail:"Leather · smart-casual"},
+  "Loafers":{slot:"shoes",icon:"👞",detail:"Suede · creative"},
+  "Derby shoes":{slot:"shoes",icon:"👞",detail:"Leather · smart"},
+  "Chunky trainers":{slot:"shoes",icon:"👟",detail:"Rubber · chunky"},
+  "Flip-flops":{slot:"shoes",icon:"🩴",detail:"Rubber · casual"},
+  "Running shoes":{slot:"shoes",icon:"👟",detail:"Mesh · sporty"},
   "Sun hat":{slot:"accessory",icon:"🎩",detail:"Straw · UV protect"},
   "Pearl earrings":{slot:"accessory",icon:"💎",detail:"Classic · elegant"},
   "Clutch bag":{slot:"accessory",icon:"👛",detail:"Satin · formal"},
@@ -286,41 +361,57 @@ const GARMENT_DATA = {
   "Briefcase":{slot:"accessory",icon:"💼",detail:"Leather · work"},
   "Formal watch":{slot:"accessory",icon:"⌚",detail:"Metal · office"},
   "Wool scarf":{slot:"accessory",icon:"🧣",detail:"Wool · warm"},
+  "Statement earrings":{slot:"accessory",icon:"💎",detail:"Gold · statement"},
+  "Satin clutch":{slot:"accessory",icon:"👛",detail:"Satin · evening"},
+  "Delicate necklace":{slot:"accessory",icon:"📿",detail:"Gold · refined"},
+  "Statement watch":{slot:"accessory",icon:"⌚",detail:"Leather · creative"},
+  "Tote bag":{slot:"accessory",icon:"👜",detail:"Canvas · creative"},
+  "Minimal chain":{slot:"accessory",icon:"📿",detail:"Silver · minimal"},
+  "Sports watch":{slot:"accessory",icon:"⌚",detail:"Plastic · sporty"},
+  "Gold bracelet":{slot:"accessory",icon:"💍",detail:"Gold · elegant"},
+  "Small handbag":{slot:"accessory",icon:"👛",detail:"Leather · neat"},
   "Navy suit jacket":{slot:"jacket",icon:"🧥",detail:"Wool blend · sharp"},
   "Charcoal blazer":{slot:"jacket",icon:"🧥",detail:"Wool · executive"},
   "Denim jacket":{slot:"jacket",icon:"🧥",detail:"Denim · casual"},
   "Bomber jacket":{slot:"jacket",icon:"🧥",detail:"Nylon · streetwear"},
   "Sequin blazer":{slot:"jacket",icon:"✨",detail:"Sequin · evening"},
+  "Black tuxedo jacket":{slot:"jacket",icon:"🤵",detail:"Wool · black-tie"},
+  "Midnight blue dinner jacket":{slot:"jacket",icon:"🤵",detail:"Velvet · gala"},
   "Navy suit trousers":{slot:"trousers",icon:"👖",detail:"Wool · matched"},
   "Charcoal trousers":{slot:"trousers",icon:"👖",detail:"Wool · classic"},
   "Grey dress trousers":{slot:"trousers",icon:"👖",detail:"Poly blend · smart"},
   "Cargo trousers":{slot:"trousers",icon:"👖",detail:"Cotton · utility"},
   "Slim joggers":{slot:"trousers",icon:"🩱",detail:"Jersey · sporty"},
   "Ripped jeans":{slot:"trousers",icon:"👖",detail:"Denim · casual"},
+  "Tailored wide-leg trousers":{slot:"trousers",icon:"👖",detail:"Linen · creative"},
+  "Cropped chinos":{slot:"trousers",icon:"👖",detail:"Cotton · smart"},
+  "Navy dress trousers":{slot:"trousers",icon:"👖",detail:"Wool · refined"},
+  "Tuxedo trousers":{slot:"trousers",icon:"👖",detail:"Wool · black-tie"},
+  "Black dress trousers with satin stripe":{slot:"trousers",icon:"👖",detail:"Wool · formal"},
   "Black oxford shoes":{slot:"shoes",icon:"👞",detail:"Leather · polished"},
   "Brown derby shoes":{slot:"shoes",icon:"👞",detail:"Leather · smart"},
-  "Chunky trainers":{slot:"shoes",icon:"👟",detail:"Rubber · chunky"},
-  "Loafers with tassels":{slot:"shoes",icon:"👞",detail:"Suede · too casual"},
   "White sneakers":{slot:"shoes",icon:"👟",detail:"Canvas · casual"},
+  "Loafers with tassels":{slot:"shoes",icon:"👞",detail:"Suede · too casual"},
+  "Patent leather oxford":{slot:"shoes",icon:"👞",detail:"Patent · black-tie"},
+  "Black formal loafers":{slot:"shoes",icon:"👞",detail:"Patent · gala"},
+  "Chelsea boots":{slot:"shoes",icon:"🥾",detail:"Leather · western"},
   "Classic tie":{slot:"accessory",icon:"👔",detail:"Silk · conservative"},
   "Pocket square":{slot:"accessory",icon:"🏳️",detail:"Cotton · refined"},
   "Leather belt":{slot:"accessory",icon:"🪡",detail:"Leather · clean"},
   "Bucket hat":{slot:"accessory",icon:"🪖",detail:"Cotton · casual"},
-  "Sports watch":{slot:"accessory",icon:"⌚",detail:"Plastic · sporty"},
   "Colourful suspenders":{slot:"accessory",icon:"🎀",detail:"Elastic · flashy"},
+  "Bow tie":{slot:"accessory",icon:"🎀",detail:"Silk · black-tie"},
+  "White pocket square":{slot:"accessory",icon:"🏳️",detail:"Linen · gala"},
+  "Cufflinks":{slot:"accessory",icon:"💎",detail:"Silver · formal"},
   "Agbada (3-piece)":{slot:"outer",icon:"🥻",detail:"Aso-oke · grand"},
   "Senator suit":{slot:"outer",icon:"🥻",detail:"Cotton · smart"},
   "Fitted buba":{slot:"inner",icon:"👕",detail:"Cotton · fitted"},
   "Plain kaftan top":{slot:"inner",icon:"🥼",detail:"Cotton · relaxed"},
   "T-shirt":{slot:"inner",icon:"👕",detail:"Jersey · casual"},
-  "Polo shirt":{slot:"inner",icon:"👕",detail:"Pique · sporty"},
   "Vest":{slot:"inner",icon:"🎽",detail:"Cotton · undershirt"},
   "Leather mules":{slot:"shoes",icon:"👞",detail:"Leather · clean"},
   "Embroidered slippers":{slot:"shoes",icon:"🩴",detail:"Fabric · traditional"},
   "Babba riga shoes":{slot:"shoes",icon:"👞",detail:"Leather · ceremonial"},
-  "Running shoes":{slot:"shoes",icon:"👟",detail:"Mesh · sporty"},
-  "Chelsea boots":{slot:"shoes",icon:"🥾",detail:"Leather · western"},
-  "Flip-flops":{slot:"shoes",icon:"🩴",detail:"Rubber · casual"},
   "Fila cap":{slot:"accessory",icon:"🎓",detail:"Embroidered · ceremony"},
   "Coral beads":{slot:"accessory",icon:"📿",detail:"Coral · regal"},
   "Embroidered cap":{slot:"accessory",icon:"🎩",detail:"Aso-oke · traditional"},
@@ -358,33 +449,126 @@ const TAILOR_CLIENTS = [
     ]}
 ];
 
+const FABRIC_QUESTIONS = [
+  {
+    swatch:"🟦", color:"#D6EAF8",
+    clue:"A crisp, plain-weave fabric with a smooth, slightly lustrous surface. Often used for dress shirts and formal blouses. Lightweight, breathable, and takes dye well. Common in both western and African formal shirts.",
+    hint:"Think of it as the 'standard' suiting shirt fabric.",
+    answer:"Cotton poplin",
+    options:["Cotton poplin","Organza","Chiffon","Dupioni silk"],
+    fact:"Cotton poplin's tight plain weave gives it that characteristic crisp feel and smooth finish. It's the fabric of choice for formal dress shirts in Lagos banking and corporate environments."
+  },
+  {
+    swatch:"🟫", color:"#FDEBD0",
+    clue:"A traditional Nigerian hand-woven fabric with a distinctive raised pattern, typically woven in strips then sewn together. Used for Agbada, gele, and iro. Comes in gold, burgundy, and earth tones for Yoruba ceremonies.",
+    hint:"It's the ceremonial fabric of choice at traditional Yoruba weddings.",
+    answer:"Aso-oke",
+    options:["Ankara","Aso-oke","Kente","Lace"],
+    fact:"Aso-oke is hand-woven on a narrow loom in strips, then sewn edge-to-edge to create the finished fabric. The weaving process is highly skilled — a single Agbada set can take weeks to produce."
+  },
+  {
+    swatch:"🌸", color:"#FDEDEC",
+    clue:"An extremely lightweight, sheer fabric with a soft drape and subtle texture from twisted yarns. Popular for evening wear, blouses, and bridesmaids' dresses. Floats on the body — perfect for warm Lagos evenings.",
+    hint:"Common in garden wedding guest outfits.",
+    answer:"Chiffon",
+    options:["Chiffon","Organza","Tulle","Voile"],
+    fact:"Chiffon's twisted yarns create its characteristic slight texture and floaty drape. Unlike organza, it's soft rather than stiff — making it the preferred fabric for flowing evening blouses and occasion dresses in hot climates."
+  },
+  {
+    swatch:"🟩", color:"#D5F5E3",
+    clue:"A breathable, plant-based fabric with a visible weave texture and slight stiffness when new, softening with wear. Cool against the skin. Ideal for trousers and shirts in Lagos heat. Wrinkles easily.",
+    hint:"The Lagos professional's summer staple. Wrinkles are almost part of the aesthetic.",
+    answer:"Linen",
+    options:["Linen","Cotton poplin","Chambray","Ramie"],
+    fact:"Linen is made from flax plant fibres. It's one of the oldest textiles in the world — and one of the best for hot, humid climates like Lagos. Its loose weave allows maximum airflow, keeping you significantly cooler than cotton or polyester."
+  },
+  {
+    swatch:"🎨", color:"#F4ECF7",
+    clue:"A Dutch wax-printed cotton fabric produced with a batik-inspired resist-dyeing technique. Sold in 6-yard pieces. Known for bold geometric and figurative prints. Essential to West African fashion identity.",
+    hint:"You'll find it at any Lagos fabric market — Balogun, Idumota, or Tejuosho.",
+    answer:"Ankara",
+    options:["Ankara","Kente","Adire","Adinkra"],
+    fact:"Despite the name, Ankara fabric is primarily produced by Dutch and Chinese manufacturers, though it's deeply embedded in West African fashion. Each Ankara print pattern often carries symbolic meaning, and certain prints become associated with specific events or periods in Nigerian culture."
+  },
+  {
+    swatch:"🌑", color:"#1A1A2E",
+    clue:"A heavyweight, cut-pile fabric with a deep, rich sheen. Crushes beautifully when touched. Originally made from silk, now often synthetic or cotton-blend. Associated with luxury and ceremony but extremely heat-retentive.",
+    hint:"Beautiful, but probably not your choice for Lagos in April.",
+    answer:"Velvet",
+    options:["Velvet","Brocade","Jacquard","Satin"],
+    fact:"Velvet's characteristic pile is created by weaving two layers of fabric simultaneously, then cutting them apart. The cut ends create the soft, light-catching surface. In Lagos, velvet is reserved for evening galas and December events — wearing it in peak heat is a serious tailoring miscalculation."
+  },
+  {
+    swatch:"✨", color:"#FEF9E7",
+    clue:"A stiff, sheer fabric with a crisp hand-feel and strong structure. Often used for wedding gowns, ball skirts, and gele fabric. Holds its shape well. Has a natural sheen without being as heavy as silk.",
+    hint:"Gives volume and structure — popular for event gele and bridal skirts.",
+    answer:"Organza",
+    options:["Organza","Chiffon","Tulle","Taffeta"],
+    fact:"Organza is woven from highly twisted filament fibres, giving it its characteristic crispness and structure. Unlike chiffon (which drapes softly), organza holds shapes and angles — making it perfect for structured skirts, gele fabric, and bridal bodices."
+  },
+  {
+    swatch:"🔵", color:"#EBF5FB",
+    clue:"A luxury woven fabric with a naturally irregular texture from its slubbed yarns, producing a subtle shimmering effect. Associated with formal evening wear and occasion suits. Has a slightly rough feel but exceptional lustre.",
+    hint:"The 'bumpy silk' — its irregularity is a feature, not a flaw.",
+    answer:"Dupioni silk",
+    options:["Dupioni silk","Shantung","Taffeta","Habotai silk"],
+    fact:"Dupioni silk's characteristic slubs (thickened sections in the yarn) occur when silk from two cocoons wound together is used. The resulting irregular texture creates a unique light-catching quality that's prized in occasion wear. Nigerian fashion designers frequently use it for bridesmaid and formal event suits."
+  },
+  {
+    swatch:"🤍", color:"#F8F9FA",
+    clue:"The world's most commonly used natural fibre. Breathable, absorbent, washable, and easy to print on. The base fabric for Ankara prints, shirt-making, and everyday Nigerian fashion. Enormous range of weights and weaves.",
+    hint:"If in doubt, it's probably this.",
+    answer:"Cotton",
+    options:["Cotton","Polyester","Viscose","Modal"],
+    fact:"Nigeria is actually a cotton-producing country, though most fabric is imported for processing. Cotton's breathability makes it the default fabric for everyday Lagos dressing — Ankara prints are cotton, aso-ofi is cotton, most casual shirts are cotton. It's the backbone of the wardrobe."
+  },
+  {
+    swatch:"🟣", color:"#E8DAEF",
+    clue:"A man-made fibre made from regenerated cellulose (usually wood pulp). Soft, smooth, and drapes beautifully. Often mistaken for silk. Less expensive than natural fibres but not as breathable. Common in affordable occasion wear.",
+    hint:"It wants to be silk when it grows up.",
+    answer:"Viscose",
+    options:["Viscose","Polyester","Nylon","Acetate"],
+    fact:"Viscose (also called rayon) was the world's first man-made fibre, invented in the 1880s as artificial silk. Its drape and soft hand-feel make it popular in affordable occasion wear, but its lack of breathability compared to natural fibres makes it a less ideal choice for Lagos heat."
+  }
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+
 let SS = { clientIdx:0, selected:{}, score:0, round:1, feedback:null, phase:"play" };
 let TS = { clientIdx:0, checked:{}, score:0, xp:0, level:1, timerLeft:90, timerMax:90, phase:"intro", tool:null };
+let FQ = { qIdx:0, score:0, streak:0, maxStreak:0, answered:false, selected:null, correct:0, phase:"play" };
 let timerInterval = null;
 
+const GAMES = ["style","tailor","fabric"];
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+
 function switchGame(g) {
-  ["style","tailor"].forEach(id => {
+  GAMES.forEach(id => {
     document.getElementById("tab-"+id).classList.toggle("active", id===g);
     document.getElementById("screen-"+id).classList.toggle("active", id===g);
     document.getElementById("pill-"+id).classList.toggle("active", id===g);
   });
   if (g==="style") renderStyle();
-  else renderTailor();
+  else if (g==="tailor") renderTailor();
+  else renderFabric();
 }
+
+// ─── STYLE GAME ───────────────────────────────────────────────────────────────
 
 function renderStyle() {
   const el = document.getElementById("style-main");
   if (SS.phase==="result") { renderStyleResult(el); return; }
   const client = STYLE_CLIENTS[SS.clientIdx % STYLE_CLIENTS.length];
   const slots = client.requiredTypes;
-  const slotLabels = {top:"Top",jacket:"Jacket",outer:"Outer",bottom_or_dress:"Bottom / Dress",trousers:"Trousers",inner:"Inner",shoes:"Shoes",accessory:"Accessory"};
+  const slotLabels = {top:"Top",jacket:"Jacket",outer:"Outer",bottom_or_dress:"Bottom/Dress",trousers:"Trousers",inner:"Inner",shoes:"Shoes",accessory:"Accessory"};
   const allGarments = buildGarments(client);
   const filled = slots.filter(s=>SS.selected[s]).length;
   const diffColor = {easy:"var(--green)",medium:"var(--amber)",hard:"var(--red)"}[client.difficulty];
 
   let html = `<div class="stat-row">
     <div class="stat-card"><div class="stat-label">Score</div><div class="stat-value">${SS.score}</div></div>
-    <div class="stat-card"><div class="stat-label">Round</div><div class="stat-value">${SS.round} / 4</div></div>
+    <div class="stat-card"><div class="stat-label">Round</div><div class="stat-value">${SS.round} / 8</div></div>
     <div class="stat-card"><div class="stat-label">Filled</div><div class="stat-value">${filled} / ${slots.length}</div></div>
   </div>
   <div class="brief-card">
@@ -396,12 +580,12 @@ function renderStyle() {
       <div class="brief-tags">${client.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
     </div>
   </div>
-  <div class="section-label" style="margin-bottom:8px;">Build the outfit</div>
+  <div class="section-label" style="margin-bottom:7px;">Build the outfit</div>
   <div class="outfit-slots">`;
   slots.forEach(s => {
     const sel = SS.selected[s];
     html += `<div class="outfit-slot ${sel?'filled':''}">
-      ${sel?`<div style="font-size:22px;margin-bottom:4px;">${sel.icon}</div><div style="font-size:11px;font-weight:500;color:var(--text);text-align:center;">${sel.name}</div>`:`<div class="slot-label">${slotLabels[s]}</div>`}
+      ${sel?`<div style="font-size:20px;margin-bottom:3px;">${sel.icon}</div><div style="font-size:10px;font-weight:500;color:var(--text);text-align:center;">${sel.name}</div>`:`<div class="slot-label">${slotLabels[s]}</div>`}
     </div>`;
   });
   html += `</div>`;
@@ -413,12 +597,12 @@ function renderStyle() {
   const categories = [...new Set(allGarments.map(g=>g.slot))];
   categories.forEach(cat => {
     const items = allGarments.filter(g=>g.slot===cat);
-    html += `<div style="margin-bottom:14px;">
+    html += `<div style="margin-bottom:12px;">
       <div class="cat-label">${slotLabels[cat]||cat}</div>
       <div class="garment-grid">`;
     items.forEach(g => {
       const isSel = SS.selected[cat] && SS.selected[cat].name===g.name;
-      html += `<div class="garment-item ${isSel?'selected':''}" onclick="selectGarment('${cat}','${g.name}','${g.icon}')">
+      html += `<div class="garment-item ${isSel?'selected':''}" onclick="selectGarment('${cat}','${escQ(g.name)}','${g.icon}')">
         <div class="garment-icon">${g.icon}</div>
         <div class="garment-name">${g.name}</div>
         <div class="garment-detail">${g.detail}</div>
@@ -435,13 +619,19 @@ function renderStyle() {
   el.innerHTML = html;
 }
 
+function escQ(s) { return s.replace(/'/g,"\\'"); }
+
 function buildGarments(client) {
   const result = [];
+  const seen = new Set();
   client.requiredTypes.forEach(slot => {
     const corrList = client.correct[slot]||[];
     const wrnList = client.wrong[slot]||[];
     [...corrList,...wrnList].forEach(name => {
-      if (GARMENT_DATA[name]) result.push({name,slot,...GARMENT_DATA[name]});
+      if (!seen.has(name) && GARMENT_DATA[name]) {
+        seen.add(name);
+        result.push({name,slot,...GARMENT_DATA[name]});
+      }
     });
   });
   return result;
@@ -475,10 +665,10 @@ function submitOutfit() {
     SS.feedback = {type:"success",msg:`✓ Perfect outfit! +100 points — ${client.tip}`};
     setTimeout(() => {
       SS.round++; SS.clientIdx++;
-      if (SS.round>4) SS.phase="result";
+      if (SS.round>8) SS.phase="result";
       SS.selected={}; SS.feedback=null;
       renderStyle();
-    }, 2400);
+    }, 2600);
   } else {
     SS.score = Math.max(0, SS.score-20);
     SS.feedback = {type:"error",msg:`✗ Not quite — ${wrongItems.length>0?wrongItems.join(" and ")+" don't suit this occasion.":"Check your choices against the brief."} −20 points.`};
@@ -487,15 +677,20 @@ function submitOutfit() {
 }
 
 function renderStyleResult(el) {
-  const pct = Math.round((SS.score/400)*100);
-  const stars = pct>=90?"⭐⭐⭐":pct>=65?"⭐⭐":"⭐";
-  const title = pct>=90?"Impeccable taste!":pct>=65?"Good eye!":"Keep styling!";
-  const sub = pct>=90?"Your clients left looking exactly right for every occasion.":pct>=65?"Mostly spot-on — a few choices missed the brief.":"Occasion dressing takes practice. Study the tips and try again.";
+  const pct = Math.round((SS.score/800)*100);
+  const stars = pct>=88?"⭐⭐⭐":pct>=60?"⭐⭐":"⭐";
+  const title = pct>=88?"Impeccable taste!":pct>=60?"Good eye!":"Keep styling!";
+  const sub = pct>=88?"Your clients left looking exactly right for every occasion.":pct>=60?"Mostly spot-on — a few choices missed the brief.":"Occasion dressing takes practice. Study the tips and try again.";
   el.innerHTML = `<div class="result-screen pop">
     <div class="result-icon">👗</div>
     <div class="result-title">${title}</div>
     <div class="result-stars">${stars}</div>
-    <div class="result-sub">Final score: <strong>${SS.score} / 400</strong> (${pct}%) — ${sub}</div>
+    <div class="result-grid">
+      <div class="result-stat"><div class="result-stat-val">${SS.score}</div><div class="result-stat-lbl">Score</div></div>
+      <div class="result-stat"><div class="result-stat-val">${pct}%</div><div class="result-stat-lbl">Accuracy</div></div>
+      <div class="result-stat"><div class="result-stat-val">8</div><div class="result-stat-lbl">Clients</div></div>
+    </div>
+    <div class="result-sub">${sub}</div>
     <button class="btn btn-primary" onclick="resetStyle()">Play again</button>
   </div>`;
 }
@@ -505,6 +700,8 @@ function resetStyle() {
   renderStyle();
 }
 
+// ─── TAILOR GAME ──────────────────────────────────────────────────────────────
+
 function renderTailor() {
   const el = document.getElementById("tailor-main");
   if (TS.phase==="result") { renderTailorResult(el); return; }
@@ -513,19 +710,19 @@ function renderTailor() {
 }
 
 function renderTailorIntro(el) {
-  el.innerHTML = `<div style="margin-bottom:1.25rem;">
+  el.innerHTML = `<div style="margin-bottom:1.125rem;">
     <div class="level-badge"><i class="ti ti-sparkles"></i> Level ${TS.level} Tailor</div>
     <div class="xp-bar-wrap"><div class="xp-bar" style="width:${Math.min(100,TS.xp)}%"></div></div>
-    <div style="font-size:11px;color:var(--text3);margin-top:2px;">${TS.xp} / 100 XP to next level · Score: ${TS.score}</div>
+    <div style="font-size:10px;color:var(--text3);margin-top:2px;">${TS.xp} / 100 XP · Score: ${TS.score}</div>
   </div>
   ${TAILOR_CLIENTS.map((c,i)=>{
     const done=i<TS.clientIdx, active=i===TS.clientIdx, locked=i>TS.clientIdx;
     return `<div class="tailor-card" style="opacity:${locked?0.45:1};">
       <div class="client-header">
-        <span style="font-size:30px;">${c.avatar}</span>
+        <span style="font-size:28px;">${c.avatar}</span>
         <div style="flex:1;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
-            <span style="font-size:15px;font-weight:600;color:var(--text);">${c.name}</span>
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:2px;">
+            <span style="font-size:14px;font-weight:600;color:var(--text);">${c.name}</span>
             <span class="diff-dot ${c.diffClass}"></span>
             <span style="font-size:11px;color:var(--text3);">${c.difficulty}</span>
           </div>
@@ -558,7 +755,12 @@ function renderTailorPlay(el) {
   const barColor = pct>50?"var(--purple)":pct>25?"var(--amber)":"var(--red)";
   const checkedCount = Object.values(TS.checked).filter(Boolean).length;
   const earnedPts = client.tasks.filter(t=>TS.checked[t.id]).reduce((a,t)=>a+t.pts,0);
-  const tools = [{id:"tape",icon:"ti-ruler",name:"Tape measure"},{id:"pins",icon:"ti-needle-thread",name:"Pins"},{id:"chalk",icon:"ti-pencil",name:"Chalk marker"},{id:"iron",icon:"ti-ironing",name:"Steam iron"}];
+  const tools = [
+    {id:"tape",icon:"ti-ruler",name:"Tape measure"},
+    {id:"pins",icon:"ti-needle-thread",name:"Pins"},
+    {id:"chalk",icon:"ti-pencil",name:"Chalk marker"},
+    {id:"iron",icon:"ti-ironing",name:"Steam iron"}
+  ];
   const activeTool = tools.find(t=>t.id===TS.tool);
 
   el.innerHTML = `<div class="stat-row">
@@ -568,10 +770,10 @@ function renderTailorPlay(el) {
   </div>
   <div class="timer-bar-wrap"><div class="timer-bar" style="width:${pct}%;background:${barColor};"></div></div>
   <div class="mannequin-area">
-    <div style="font-size:56px;margin-bottom:8px;">${client.avatar}</div>
-    <div style="font-size:15px;font-weight:600;color:var(--text);">${client.name}</div>
+    <div style="font-size:50px;margin-bottom:7px;">${client.avatar}</div>
+    <div style="font-size:14px;font-weight:600;color:var(--text);">${client.name}</div>
     <div style="font-size:12px;color:var(--text2);margin-top:2px;">${client.garment}</div>
-    ${activeTool?`<div style="margin-top:10px;font-size:12px;color:var(--purple);font-weight:500;"><i class="ti ${activeTool.icon}" style="font-size:14px;"></i> Using: ${activeTool.name}</div>`:`<div style="margin-top:10px;font-size:12px;color:var(--text3);">Select a tool below</div>`}
+    ${activeTool?`<div style="margin-top:9px;font-size:12px;color:var(--purple);font-weight:500;"><i class="ti ${activeTool.icon}" style="font-size:13px;"></i> Using: ${activeTool.name}</div>`:`<div style="margin-top:9px;font-size:12px;color:var(--text3);">Select a tool below</div>`}
   </div>
   <div class="section-label">Tools</div>
   <div class="tool-grid">
@@ -587,7 +789,7 @@ function renderTailorPlay(el) {
         const done=TS.checked[t.id];
         return `<li class="task-item">
           <div class="task-check ${done?'done':''}" onclick="checkTask('${t.id}')">
-            ${done?'<i class="ti ti-check" style="font-size:12px;"></i>':''}
+            ${done?'<i class="ti ti-check" style="font-size:11px;"></i>':''}
           </div>
           <span class="task-text ${done?'done':''}">${t.text}</span>
           <span class="task-pts">+${t.pts}pt</span>
@@ -625,7 +827,12 @@ function renderTailorResult(el) {
     <div class="result-title">${title}</div>
     <div class="result-stars">${stars}</div>
     <div class="level-badge" style="margin:0 auto 1rem;display:inline-flex;"><i class="ti ti-sparkles"></i> Level ${TS.level} Tailor</div>
-    <div class="result-sub" style="margin-top:0.75rem;">Score: <strong>${TS.score}</strong> — ${sub}</div>
+    <div class="result-grid" style="margin-top:1rem;">
+      <div class="result-stat"><div class="result-stat-val">${TS.score}</div><div class="result-stat-lbl">Score</div></div>
+      <div class="result-stat"><div class="result-stat-val">${pct}%</div><div class="result-stat-lbl">Rating</div></div>
+      <div class="result-stat"><div class="result-stat-val">${TS.level}</div><div class="result-stat-lbl">Level</div></div>
+    </div>
+    <div class="result-sub" style="margin-top:1rem;">${sub}</div>
     <button class="btn btn-primary" onclick="resetTailor()" style="margin-top:1.25rem;">Play again</button>
   </div>`;
 }
@@ -636,6 +843,95 @@ function resetTailor() {
   renderTailor();
 }
 
+// ─── FABRIC QUIZ ─────────────────────────────────────────────────────────────
+
+function renderFabric() {
+  const el = document.getElementById("fabric-main");
+  if (FQ.phase==="result") { renderFabricResult(el); return; }
+
+  const q = FABRIC_QUESTIONS[FQ.qIdx];
+
+  let html = `<div class="stat-row">
+    <div class="stat-card"><div class="stat-label">Score</div><div class="stat-value">${FQ.score}</div></div>
+    <div class="stat-card"><div class="stat-label">Question</div><div class="stat-value">${FQ.qIdx+1} / ${FABRIC_QUESTIONS.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Streak</div><div class="stat-value">${FQ.streak > 0 ? FQ.streak + ' 🔥' : '—'}</div></div>
+  </div>
+  <div class="fabric-card">
+    <div class="fabric-swatch" style="background:${q.color};">${q.swatch}</div>
+    <div class="fabric-clue">${q.clue}</div>
+    <div class="fabric-hint">${q.hint}</div>
+    <div class="quiz-options">
+      ${q.options.map(opt => {
+        let cls = '';
+        if (FQ.answered) {
+          if (opt === q.answer) cls = 'correct';
+          else if (opt === FQ.selected) cls = 'wrong';
+        }
+        return `<button class="quiz-option ${cls}" onclick="answerFabric('${escQ(opt)}')" ${FQ.answered?'disabled':''}>
+          ${opt}
+        </button>`;
+      }).join('')}
+    </div>
+    <div class="quiz-fact ${FQ.answered?'show':''}">${q.fact}</div>
+  </div>
+  ${FQ.answered ? `<div class="btn-row"><button class="btn btn-primary" onclick="nextFabric()">${FQ.qIdx+1<FABRIC_QUESTIONS.length?'Next question <i class="ti ti-arrow-right"></i>':'See results <i class="ti ti-trophy"></i>'}</button></div>` : ''}`;
+
+  el.innerHTML = html;
+}
+
+function answerFabric(opt) {
+  if (FQ.answered) return;
+  const q = FABRIC_QUESTIONS[FQ.qIdx];
+  FQ.answered = true;
+  FQ.selected = opt;
+  if (opt === q.answer) {
+    const streakBonus = FQ.streak >= 2 ? 10 : 0;
+    FQ.score += 100 + streakBonus;
+    FQ.streak++;
+    FQ.correct++;
+    if (FQ.streak > FQ.maxStreak) FQ.maxStreak = FQ.streak;
+  } else {
+    FQ.streak = 0;
+  }
+  renderFabric();
+}
+
+function nextFabric() {
+  FQ.qIdx++;
+  FQ.answered = false;
+  FQ.selected = null;
+  if (FQ.qIdx >= FABRIC_QUESTIONS.length) {
+    FQ.phase = "result";
+  }
+  renderFabric();
+}
+
+function renderFabricResult(el) {
+  const total = FABRIC_QUESTIONS.length;
+  const pct = Math.round((FQ.correct/total)*100);
+  const stars = pct>=90?"⭐⭐⭐":pct>=60?"⭐⭐":"⭐";
+  const title = pct>=90?"Textile Expert!":pct>=60?"Fabric-Savvy!":"Keep Learning!";
+  const sub = pct>=90?"You could advise any Mendall client on material choices.":pct>=60?"Good fabric awareness — a few materials to study further.":"Spend time at Balogun market — the fabrics will teach you.";
+  el.innerHTML = `<div class="result-screen pop">
+    <div class="result-icon">🧵</div>
+    <div class="result-title">${title}</div>
+    <div class="result-stars">${stars}</div>
+    <div class="result-grid">
+      <div class="result-stat"><div class="result-stat-val">${FQ.correct}/${total}</div><div class="result-stat-lbl">Correct</div></div>
+      <div class="result-stat"><div class="result-stat-val">${FQ.score}</div><div class="result-stat-lbl">Score</div></div>
+      <div class="result-stat"><div class="result-stat-val">${FQ.maxStreak}🔥</div><div class="result-stat-lbl">Best streak</div></div>
+    </div>
+    <div class="result-sub" style="margin-top:0.75rem;">${sub}</div>
+    <button class="btn btn-primary" onclick="resetFabric()" style="margin-top:1.25rem;">Play again</button>
+  </div>`;
+}
+
+function resetFabric() {
+  FQ = {qIdx:0,score:0,streak:0,maxStreak:0,answered:false,selected:null,correct:0,phase:"play"};
+  renderFabric();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
 renderStyle();
 </script>
 </body>

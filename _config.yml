@@ -1,0 +1,8 @@
+title: MENDROBE — Mendall Fitting Room Games
+description: Learn to dress well. By playing.
+url: "https://omoware.github.io"
+baseurl: "/MENDROBE"
+theme: null
+plugins: []
+include:
+  - 404.html

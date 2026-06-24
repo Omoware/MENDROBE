@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MENDROBE — Mendall Fitting Room Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --purple: #534AB7;
+    --purple-mid: #7F77DD;
+    --purple-light: #EEEDFE;
+    --purple-dark: #3C3489;
+    --bg: #FAF9FF;
+    --surface: #FFFFFF;
+    --surface2: #F4F3FB;
+    --border: rgba(83,74,183,0.15);
+    --border2: rgba(83,74,183,0.3);
+    --text: #1A1724;
+    --text2: #6B6489;
+    --text3: #9D99B8;
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #085041;
+    --red: #E24B4A;
+    --red-light: #FCEBEB;
+    --amber: #EF9F27;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --shadow: 0 1px 3px rgba(83,74,183,0.08), 0 0 0 0.5px rgba(83,74,183,0.1);
+  }
+  html { font-size: 16px; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* NAV */
+  .nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .nav-brand { font-size: 17px; font-weight: 600; color: var(--purple); letter-spacing: -0.02em; }
+  .nav-brand span { color: var(--text2); font-weight: 400; }
+  .nav-tabs { display: flex; gap: 4px; }
+  .nav-tab { padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text2); transition: all 0.15s; }
+  .nav-tab:hover { background: var(--purple-light); color: var(--purple); }
+  .nav-tab.active { background: var(--purple); color: white; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); padding: 3rem 1.5rem 2.5rem; text-align: center; }
+  .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); color: white; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 1rem; }
+  .hero h1 { font-size: clamp(28px, 6vw, 42px); font-weight: 600; color: white; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 0.75rem; }
+  .hero p { font-size: 15px; color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 2rem; line-height: 1.6; }
+  .hero-games { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .hero-game-pill { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 13px; padding: 8px 18px; border-radius: 99px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 7px; }
+  .hero-game-pill:hover, .hero-game-pill.active { background: white; color: var(--purple); }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 740px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* STAT ROW */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.875rem 1rem; }
+  .stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 3px; }
+  .stat-value { font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+
+  /* BRIEF CARD */
+  .brief-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem; display: flex; gap: 1rem; }
+  .client-avatar { width: 54px; height: 54px; border-radius: 50%; background: var(--purple-light); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+  .brief-meta { font-size: 11px; color: var(--text3); margin-bottom: 3px; font-weight: 500; }
+  .brief-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em; }
+  .brief-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .brief-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .tag { font-size: 11px; padding: 3px 10px; border-radius: 99px; background: var(--purple-light); color: var(--purple); font-weight: 500; }
+
+  /* OUTFIT SLOTS */
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+  .outfit-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.25rem; }
+  .outfit-slot { background: var(--surface2); border: 1.5px dashed var(--border2); border-radius: var(--radius); padding: 12px 6px; text-align: center; min-height: 82px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.15s; }
+  .outfit-slot.filled { border-style: solid; border-color: var(--border); background: var(--surface); }
+  .slot-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* GARMENT GRID */
+  .garment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; margin-bottom: 14px; }
+  .garment-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 6px; text-align: center; cursor: pointer; transition: all 0.12s; user-select: none; }
+  .garment-item:hover { border-color: var(--purple-mid); background: var(--purple-light); }
+  .garment-item.selected { border: 2px solid var(--purple); background: var(--purple-light); }
+  .garment-item.wrong { border: 2px solid var(--red); background: var(--red-light); animation: shake 0.3s; }
+  .garment-item.correct-flash { border: 2px solid var(--green); background: var(--green-light); }
+  .garment-icon { font-size: 24px; margin-bottom: 4px; }
+  .garment-name { font-size: 11px; color: var(--text); font-weight: 500; }
+  .garment-detail { font-size: 10px; color: var(--text3); margin-top: 1px; }
+
+  /* FEEDBACK */
+  .feedback-banner { border-radius: var(--radius); padding: 12px 16px; margin-bottom: 1.25rem; font-size: 13px; line-height: 1.6; display: none; }
+  .feedback-banner.success { background: var(--green-light); color: var(--green-dark); display: block; border-left: 3px solid var(--green); }
+  .feedback-banner.error { background: var(--red-light); color: #791F1F; display: block; border-left: 3px solid var(--red); }
+
+  /* BUTTONS */
+  .btn-row { display: flex; gap: 8px; margin-top: 1rem; }
+  .btn { padding: 9px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid var(--border2); background: transparent; color: var(--text); transition: all 0.12s; font-family: inherit; }
+  .btn:hover { background: var(--surface2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-primary { background: var(--purple); color: white; border-color: var(--purple); }
+  .btn-primary:hover { background: var(--purple-dark); border-color: var(--purple-dark); }
+  .btn-sm { padding: 6px 14px; font-size: 13px; }
+
+  /* TAILOR */
+  .timer-bar-wrap { background: var(--surface2); border-radius: 99px; height: 6px; margin-bottom: 1.25rem; overflow: hidden; border: 1px solid var(--border); }
+  .timer-bar { height: 100%; border-radius: 99px; background: var(--purple); transition: width 0.5s linear, background 0.3s; }
+  .tailor-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+  .task-list { list-style: none; }
+  .task-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .task-item:last-child { border-bottom: none; }
+  .task-check { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border2); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.15s; font-size: 13px; color: transparent; }
+  .task-check.done { background: var(--green); border-color: var(--green); color: white; }
+  .task-text { font-size: 13px; color: var(--text); flex: 1; line-height: 1.5; }
+  .task-text.done { text-decoration: line-through; color: var(--text3); }
+  .task-pts { font-size: 11px; color: var(--purple); font-weight: 600; }
+  .tool-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.25rem; }
+  .tool-btn { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 6px; text-align: center; cursor: pointer; transition: all 0.12s; }
+  .tool-btn:hover { border-color: var(--purple-mid); background: var(--purple-light); }
+  .tool-btn.active-tool { border: 2px solid var(--purple); background: var(--purple-light); }
+  .tool-icon { font-size: 22px; color: var(--purple); margin-bottom: 4px; }
+  .tool-name { font-size: 11px; color: var(--text); font-weight: 500; }
+  .mannequin-area { background: var(--surface2); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; margin-bottom: 1.25rem; border: 1px solid var(--border); }
+  .level-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 4px 12px; border-radius: 99px; background: var(--purple-light); color: var(--purple); font-weight: 600; }
+  .xp-bar-wrap { background: var(--surface2); border-radius: 99px; height: 7px; margin: 8px 0 4px; overflow: hidden; border: 1px solid var(--border); }
+  .xp-bar { height: 100%; border-radius: 99px; background: var(--purple); transition: width 0.4s ease; }
+  .client-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .diff-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .diff-easy { background: var(--green); }
+  .diff-medium { background: var(--amber); }
+  .diff-hard { background: var(--red); }
+
+  /* RESULT */
+  .result-screen { text-align: center; padding: 3rem 1rem; }
+  .result-icon { font-size: 60px; margin-bottom: 1rem; }
+  .result-title { font-size: 26px; font-weight: 600; color: var(--text); margin-bottom: 6px; letter-spacing: -0.02em; }
+  .result-stars { font-size: 34px; letter-spacing: 6px; margin-bottom: 1rem; }
+  .result-sub { font-size: 14px; color: var(--text2); line-height: 1.6; max-width: 420px; margin: 0 auto 1.75rem; }
+
+  /* INTRO SCREEN */
+  .intro { text-align: center; padding: 2.5rem 1rem; }
+  .intro-icon { font-size: 52px; margin-bottom: 1rem; }
+  .intro h2 { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .intro p { font-size: 14px; color: var(--text2); line-height: 1.7; max-width: 440px; margin: 0 auto 1.75rem; }
+
+  /* CATEGORY LABEL */
+  .cat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; font-weight: 600; }
+
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+  @keyframes pop { 0%{transform:scale(0.9);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .pop { animation: pop 0.25s ease forwards; }
+
+  @media (max-width: 520px) {
+    .outfit-slots { grid-template-columns: repeat(2, 1fr); }
+    .tool-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-value { font-size: 18px; }
+    .hero h1 { font-size: 26px; }
+    .nav-brand span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">MENDROBE <span>by Mendall</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-style" onclick="switchGame('style')">
+      <i class="ti ti-hanger"></i> Style
+    </button>
+    <button class="nav-tab" id="tab-tailor" onclick="switchGame('tailor')">
+      <i class="ti ti-scissors"></i> Tailor
+    </button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Mendall Fitting Room</div>
+  <h1>Learn to dress well.<br>By playing.</h1>
+  <p>Two games. Real Lagos occasions. Actual tailoring knowledge — taught through play, not lectures.</p>
+  <div class="hero-games">
+    <div class="hero-game-pill active" id="pill-style" onclick="switchGame('style')">
+      <i class="ti ti-hanger"></i> Style the Client
+    </div>
+    <div class="hero-game-pill" id="pill-tailor" onclick="switchGame('tailor')">
+      <i class="ti ti-scissors"></i> Tailor's Table
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="screen active" id="screen-style">
+    <div id="style-main"></div>
+  </div>
+  <div class="screen" id="screen-tailor">
+    <div id="tailor-main"></div>
+  </div>
+</div>
+
+<script>
+const STYLE_CLIENTS = [
+  {
+    id:1, name:"Amara O.", event:"Garden Wedding Guest", avatar:"👩🏾", difficulty:"easy",
+    desc:"Attending a cousin's outdoor garden wedding in Ikoyi. Elegant but not overdressed. Pastel or floral welcome. Heels may sink — factor in the shoes.",
+    tags:["outdoor","formal-adjacent","pastel/floral","daytime"],
+    tip:"Garden weddings call for breathable fabrics like chiffon or linen. Avoid heavy velvet or dark dramatic tones. Stilettos sink into grass — a block heel or wedge is the smart move.",
+    requiredTypes:["top","bottom_or_dress","shoes","accessory"],
+    correct:{ top:["Chiffon blouse","Floral midi dress"], bottom_or_dress:["Floral midi dress","A-line skirt","Palazzo pants"], shoes:["Block-heel sandals","Wedge sandals"], accessory:["Sun hat","Pearl earrings","Clutch bag"] },
+    wrong:{ top:["Power blazer","Crop top","Sequin jacket"], bottom_or_dress:["Mini skirt","Leather trousers","Tracksuit bottoms"], shoes:["Stiletto heels","Trainers","Combat boots"], accessory:["Baseball cap","Chunky chain","Backpack"] }
+  },
+  {
+    id:2, name:"Tunde A.", event:"Finance Job Interview", avatar:"👨🏿", difficulty:"easy",
+    desc:"First-round interview at a tier-1 investment bank on Victoria Island. Conservative dress code. Fit and grooming do the heavy lifting.",
+    tags:["formal","conservative","muted palette","corporate"],
+    tip:"In finance interviews, fit beats fabric every time. A well-tailored suit in navy or charcoal signals seriousness. Avoid loud patterns or overly trendy cuts.",
+    requiredTypes:["jacket","trousers","shoes","accessory"],
+    correct:{ jacket:["Navy suit jacket","Charcoal blazer"], trousers:["Navy suit trousers","Charcoal trousers","Grey dress trousers"], shoes:["Black oxford shoes","Brown derby shoes"], accessory:["Classic tie","Pocket square","Leather belt"] },
+    wrong:{ jacket:["Denim jacket","Bomber jacket","Sequin blazer"], trousers:["Cargo trousers","Slim joggers","Ripped jeans"], shoes:["Chunky trainers","Loafers with tassels","White sneakers"], accessory:["Bucket hat","Sports watch","Colourful suspenders"] }
+  },
+  {
+    id:3, name:"Chioma B.", event:"Beach Party — Elegushi", avatar:"👩🏽", difficulty:"medium",
+    desc:"Sunset beach party at Elegushi. Fun, flirty, Instagram-ready — but practical for sand and wind. Colour is welcome. Comfort is essential.",
+    tags:["casual","vibrant","beach","evening"],
+    tip:"Beach occasion dressing balances visual punch with practicality. Breathable fabrics, flat or wedge footwear, and statement accessories do more work than complex layering.",
+    requiredTypes:["top","bottom_or_dress","shoes","accessory"],
+    correct:{ top:["Crop top","Off-shoulder blouse","Crochet coverup"], bottom_or_dress:["Linen wide-leg trousers","Maxi dress","Wrap skirt"], shoes:["Flat strappy sandals","Espadrilles","Beaded slippers"], accessory:["Oversized sunglasses","Shell jewellery","Beach tote"] },
+    wrong:{ top:["Formal blouse","Thick knit jumper","Suit jacket"], bottom_or_dress:["Pencil skirt","Suit trousers","Leather leggings"], shoes:["Court heels","Knee-high boots","Oxford shoes"], accessory:["Briefcase","Formal watch","Wool scarf"] }
+  },
+  {
+    id:4, name:"Emeka N.", event:"Aso-ebi Ceremony", avatar:"👨🏾", difficulty:"medium",
+    desc:"A family friend's traditional marriage — he has fabric for an Agbada set. Correct silhouette, underpiece, and shoe combination required for a polished look.",
+    tags:["traditional","Yoruba ceremony","agbada","festive"],
+    tip:"The Agbada flows best with a well-fitted Sokoto and Buba underneath. Shoe choice — embroidered mules or Babba riga leather — elevates the full ensemble. Avoid western shoes.",
+    requiredTypes:["outer","inner","shoes","accessory"],
+    correct:{ outer:["Agbada (3-piece)","Senator suit"], inner:["Fitted buba","Plain kaftan top"], shoes:["Leather mules","Embroidered slippers","Babba riga shoes"], accessory:["Fila cap","Coral beads","Embroidered cap"] },
+    wrong:{ outer:["Suit jacket","Bomber jacket","Denim jacket"], inner:["T-shirt","Polo shirt","Vest"], shoes:["Running shoes","Chelsea boots","Flip-flops"], accessory:["Baseball cap","Snapback","Western tie"] }
+  }
+];
+
+const GARMENT_DATA = {
+  "Chiffon blouse":{slot:"top",icon:"👚",detail:"Chiffon · airy"},
+  "Floral midi dress":{slot:"top",icon:"👗",detail:"Cotton blend · relaxed"},
+  "Power blazer":{slot:"top",icon:"🧥",detail:"Wool · structured"},
+  "Crop top":{slot:"top",icon:"👕",detail:"Jersey · casual"},
+  "Sequin jacket":{slot:"top",icon:"✨",detail:"Sequin · glamorous"},
+  "Off-shoulder blouse":{slot:"top",icon:"👚",detail:"Linen · breezy"},
+  "Crochet coverup":{slot:"top",icon:"🧶",detail:"Crochet · beach"},
+  "Formal blouse":{slot:"top",icon:"👔",detail:"Polyester · stiff"},
+  "Thick knit jumper":{slot:"top",icon:"🧥",detail:"Wool · warm"},
+  "Suit jacket":{slot:"top",icon:"🧥",detail:"Wool · formal"},
+  "A-line skirt":{slot:"bottom_or_dress",icon:"👗",detail:"Chiffon · floaty"},
+  "Palazzo pants":{slot:"bottom_or_dress",icon:"👖",detail:"Linen · wide-leg"},
+  "Mini skirt":{slot:"bottom_or_dress",icon:"🩲",detail:"Denim · casual"},
+  "Leather trousers":{slot:"bottom_or_dress",icon:"👖",detail:"Leather · edgy"},
+  "Tracksuit bottoms":{slot:"bottom_or_dress",icon:"🩱",detail:"Jersey · sporty"},
+  "Linen wide-leg trousers":{slot:"bottom_or_dress",icon:"👖",detail:"Linen · breathable"},
+  "Maxi dress":{slot:"bottom_or_dress",icon:"👗",detail:"Chiffon · flowing"},
+  "Wrap skirt":{slot:"bottom_or_dress",icon:"👗",detail:"Cotton · casual"},
+  "Pencil skirt":{slot:"bottom_or_dress",icon:"👗",detail:"Poly · structured"},
+  "Suit trousers":{slot:"bottom_or_dress",icon:"👖",detail:"Wool · formal"},
+  "Leather leggings":{slot:"bottom_or_dress",icon:"🩱",detail:"PU · tight"},
+  "Block-heel sandals":{slot:"shoes",icon:"👡",detail:"Heel: 5cm · stable"},
+  "Wedge sandals":{slot:"shoes",icon:"👠",detail:"Wedge · garden-safe"},
+  "Stiletto heels":{slot:"shoes",icon:"👠",detail:"Heel: 10cm · risky"},
+  "Trainers":{slot:"shoes",icon:"👟",detail:"Canvas · casual"},
+  "Combat boots":{slot:"shoes",icon:"🥾",detail:"Leather · heavy"},
+  "Flat strappy sandals":{slot:"shoes",icon:"🩴",detail:"Flat · sand-ready"},
+  "Espadrilles":{slot:"shoes",icon:"👟",detail:"Jute · beach"},
+  "Beaded slippers":{slot:"shoes",icon:"🩴",detail:"Beaded · local"},
+  "Court heels":{slot:"shoes",icon:"👠",detail:"Heel: 8cm · formal"},
+  "Knee-high boots":{slot:"shoes",icon:"🥾",detail:"Leather · hot"},
+  "Oxford shoes":{slot:"shoes",icon:"👞",detail:"Leather · formal"},
+  "Sun hat":{slot:"accessory",icon:"🎩",detail:"Straw · UV protect"},
+  "Pearl earrings":{slot:"accessory",icon:"💎",detail:"Classic · elegant"},
+  "Clutch bag":{slot:"accessory",icon:"👛",detail:"Satin · formal"},
+  "Baseball cap":{slot:"accessory",icon:"🧢",detail:"Cotton · sporty"},
+  "Chunky chain":{slot:"accessory",icon:"⛓️",detail:"Metal · streetwear"},
+  "Backpack":{slot:"accessory",icon:"🎒",detail:"Canvas · casual"},
+  "Oversized sunglasses":{slot:"accessory",icon:"🕶️",detail:"UV400 · beach"},
+  "Shell jewellery":{slot:"accessory",icon:"🐚",detail:"Natural · coastal"},
+  "Beach tote":{slot:"accessory",icon:"👜",detail:"Woven · practical"},
+  "Briefcase":{slot:"accessory",icon:"💼",detail:"Leather · work"},
+  "Formal watch":{slot:"accessory",icon:"⌚",detail:"Metal · office"},
+  "Wool scarf":{slot:"accessory",icon:"🧣",detail:"Wool · warm"},
+  "Navy suit jacket":{slot:"jacket",icon:"🧥",detail:"Wool blend · sharp"},
+  "Charcoal blazer":{slot:"jacket",icon:"🧥",detail:"Wool · executive"},
+  "Denim jacket":{slot:"jacket",icon:"🧥",detail:"Denim · casual"},
+  "Bomber jacket":{slot:"jacket",icon:"🧥",detail:"Nylon · streetwear"},
+  "Sequin blazer":{slot:"jacket",icon:"✨",detail:"Sequin · evening"},
+  "Navy suit trousers":{slot:"trousers",icon:"👖",detail:"Wool · matched"},
+  "Charcoal trousers":{slot:"trousers",icon:"👖",detail:"Wool · classic"},
+  "Grey dress trousers":{slot:"trousers",icon:"👖",detail:"Poly blend · smart"},
+  "Cargo trousers":{slot:"trousers",icon:"👖",detail:"Cotton · utility"},
+  "Slim joggers":{slot:"trousers",icon:"🩱",detail:"Jersey · sporty"},
+  "Ripped jeans":{slot:"trousers",icon:"👖",detail:"Denim · casual"},
+  "Black oxford shoes":{slot:"shoes",icon:"👞",detail:"Leather · polished"},
+  "Brown derby shoes":{slot:"shoes",icon:"👞",detail:"Leather · smart"},
+  "Chunky trainers":{slot:"shoes",icon:"👟",detail:"Rubber · chunky"},
+  "Loafers with tassels":{slot:"shoes",icon:"👞",detail:"Suede · too casual"},
+  "White sneakers":{slot:"shoes",icon:"👟",detail:"Canvas · casual"},
+  "Classic tie":{slot:"accessory",icon:"👔",detail:"Silk · conservative"},
+  "Pocket square":{slot:"accessory",icon:"🏳️",detail:"Cotton · refined"},
+  "Leather belt":{slot:"accessory",icon:"🪡",detail:"Leather · clean"},
+  "Bucket hat":{slot:"accessory",icon:"🪖",detail:"Cotton · casual"},
+  "Sports watch":{slot:"accessory",icon:"⌚",detail:"Plastic · sporty"},
+  "Colourful suspenders":{slot:"accessory",icon:"🎀",detail:"Elastic · flashy"},
+  "Agbada (3-piece)":{slot:"outer",icon:"🥻",detail:"Aso-oke · grand"},
+  "Senator suit":{slot:"outer",icon:"🥻",detail:"Cotton · smart"},
+  "Fitted buba":{slot:"inner",icon:"👕",detail:"Cotton · fitted"},
+  "Plain kaftan top":{slot:"inner",icon:"🥼",detail:"Cotton · relaxed"},
+  "T-shirt":{slot:"inner",icon:"👕",detail:"Jersey · casual"},
+  "Polo shirt":{slot:"inner",icon:"👕",detail:"Pique · sporty"},
+  "Vest":{slot:"inner",icon:"🎽",detail:"Cotton · undershirt"},
+  "Leather mules":{slot:"shoes",icon:"👞",detail:"Leather · clean"},
+  "Embroidered slippers":{slot:"shoes",icon:"🩴",detail:"Fabric · traditional"},
+  "Babba riga shoes":{slot:"shoes",icon:"👞",detail:"Leather · ceremonial"},
+  "Running shoes":{slot:"shoes",icon:"👟",detail:"Mesh · sporty"},
+  "Chelsea boots":{slot:"shoes",icon:"🥾",detail:"Leather · western"},
+  "Flip-flops":{slot:"shoes",icon:"🩴",detail:"Rubber · casual"},
+  "Fila cap":{slot:"accessory",icon:"🎓",detail:"Embroidered · ceremony"},
+  "Coral beads":{slot:"accessory",icon:"📿",detail:"Coral · regal"},
+  "Embroidered cap":{slot:"accessory",icon:"🎩",detail:"Aso-oke · traditional"},
+  "Snapback":{slot:"accessory",icon:"🧢",detail:"Polyester · streetwear"},
+  "Western tie":{slot:"accessory",icon:"👔",detail:"Silk · western"}
+};
+
+const TAILOR_CLIENTS = [
+  { name:"Mrs. Adeyemi", garment:"Ankara shift dress", avatar:"👩🏾", difficulty:"easy", diffClass:"diff-easy",
+    tasks:[
+      {id:"t1",text:"Take bust measurement (ensure 2cm ease allowance)",pts:20},
+      {id:"t2",text:"Mark and pin hem to correct length",pts:20},
+      {id:"t3",text:"Taper the side seams by 1.5cm each side",pts:25},
+      {id:"t4",text:"Press seams flat with tailoring cloth",pts:15},
+      {id:"t5",text:"Quality check — inspect stitching and finish",pts:20}
+    ]},
+  { name:"Mr. Okafor", garment:"3-piece native suit", avatar:"👨🏿", difficulty:"medium", diffClass:"diff-medium",
+    tasks:[
+      {id:"t1",text:"Measure shoulder width and mark adjustment",pts:20},
+      {id:"t2",text:"Let out trouser waistband by 3cm",pts:25},
+      {id:"t3",text:"Re-stitch collar stand for clean lay-flat finish",pts:30},
+      {id:"t4",text:"Shorten jacket sleeves by 2cm, preserve button detail",pts:30},
+      {id:"t5",text:"Steam press full garment on dress form",pts:20},
+      {id:"t6",text:"Attach lining to jacket interior and slip-stitch",pts:25}
+    ]},
+  { name:"Miss Ifeoma — Bride", garment:"Wedding gown alteration", avatar:"👰🏽", difficulty:"hard", diffClass:"diff-hard",
+    tasks:[
+      {id:"t1",text:"Full body measurement — bust, waist, hips, height",pts:25},
+      {id:"t2",text:"Take in bodice by 2cm each side (preserve boning)",pts:40},
+      {id:"t3",text:"Bustle hem for reception — attach loops and ties",pts:35},
+      {id:"t4",text:"Reinforce back zip panel with interfacing",pts:30},
+      {id:"t5",text:"Hand-sew lace appliqué to shoulder seam",pts:35},
+      {id:"t6",text:"Steam and dress full gown on mannequin",pts:20},
+      {id:"t7",text:"Final inspection — no threads, chalk marks, or puckers",pts:30}
+    ]}
+];
+
+let SS = { clientIdx:0, selected:{}, score:0, round:1, feedback:null, phase:"play" };
+let TS = { clientIdx:0, checked:{}, score:0, xp:0, level:1, timerLeft:90, timerMax:90, phase:"intro", tool:null };
+let timerInterval = null;
+
+function switchGame(g) {
+  ["style","tailor"].forEach(id => {
+    document.getElementById("tab-"+id).classList.toggle("active", id===g);
+    document.getElementById("screen-"+id).classList.toggle("active", id===g);
+    document.getElementById("pill-"+id).classList.toggle("active", id===g);
+  });
+  if (g==="style") renderStyle();
+  else renderTailor();
+}
+
+function renderStyle() {
+  const el = document.getElementById("style-main");
+  if (SS.phase==="result") { renderStyleResult(el); return; }
+  const client = STYLE_CLIENTS[SS.clientIdx % STYLE_CLIENTS.length];
+  const slots = client.requiredTypes;
+  const slotLabels = {top:"Top",jacket:"Jacket",outer:"Outer",bottom_or_dress:"Bottom / Dress",trousers:"Trousers",inner:"Inner",shoes:"Shoes",accessory:"Accessory"};
+  const allGarments = buildGarments(client);
+  const filled = slots.filter(s=>SS.selected[s]).length;
+  const diffColor = {easy:"var(--green)",medium:"var(--amber)",hard:"var(--red)"}[client.difficulty];
+
+  let html = `<div class="stat-row">
+    <div class="stat-card"><div class="stat-label">Score</div><div class="stat-value">${SS.score}</div></div>
+    <div class="stat-card"><div class="stat-label">Round</div><div class="stat-value">${SS.round} / 4</div></div>
+    <div class="stat-card"><div class="stat-label">Filled</div><div class="stat-value">${filled} / ${slots.length}</div></div>
+  </div>
+  <div class="brief-card">
+    <div class="client-avatar">${client.avatar}</div>
+    <div style="flex:1;">
+      <div class="brief-meta">${client.name} · <span style="color:${diffColor};font-weight:600;">${client.difficulty}</span></div>
+      <div class="brief-title">${client.event}</div>
+      <div class="brief-desc">${client.desc}</div>
+      <div class="brief-tags">${client.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+    </div>
+  </div>
+  <div class="section-label" style="margin-bottom:8px;">Build the outfit</div>
+  <div class="outfit-slots">`;
+  slots.forEach(s => {
+    const sel = SS.selected[s];
+    html += `<div class="outfit-slot ${sel?'filled':''}">
+      ${sel?`<div style="font-size:22px;margin-bottom:4px;">${sel.icon}</div><div style="font-size:11px;font-weight:500;color:var(--text);text-align:center;">${sel.name}</div>`:`<div class="slot-label">${slotLabels[s]}</div>`}
+    </div>`;
+  });
+  html += `</div>`;
+
+  if (SS.feedback) {
+    html += `<div class="feedback-banner ${SS.feedback.type}">${SS.feedback.msg}</div>`;
+  }
+
+  const categories = [...new Set(allGarments.map(g=>g.slot))];
+  categories.forEach(cat => {
+    const items = allGarments.filter(g=>g.slot===cat);
+    html += `<div style="margin-bottom:14px;">
+      <div class="cat-label">${slotLabels[cat]||cat}</div>
+      <div class="garment-grid">`;
+    items.forEach(g => {
+      const isSel = SS.selected[cat] && SS.selected[cat].name===g.name;
+      html += `<div class="garment-item ${isSel?'selected':''}" onclick="selectGarment('${cat}','${g.name}','${g.icon}')">
+        <div class="garment-icon">${g.icon}</div>
+        <div class="garment-name">${g.name}</div>
+        <div class="garment-detail">${g.detail}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  html += `<div class="btn-row">
+    <button class="btn btn-primary" onclick="submitOutfit()" ${filled<slots.length?'disabled':''}>Submit outfit</button>
+    <button class="btn" onclick="clearOutfit()">Clear</button>
+  </div>`;
+
+  el.innerHTML = html;
+}
+
+function buildGarments(client) {
+  const result = [];
+  client.requiredTypes.forEach(slot => {
+    const corrList = client.correct[slot]||[];
+    const wrnList = client.wrong[slot]||[];
+    [...corrList,...wrnList].forEach(name => {
+      if (GARMENT_DATA[name]) result.push({name,slot,...GARMENT_DATA[name]});
+    });
+  });
+  return result;
+}
+
+function selectGarment(slot, name, icon) {
+  SS.selected[slot] = {name,icon};
+  SS.feedback = null;
+  renderStyle();
+}
+
+function clearOutfit() {
+  SS.selected = {};
+  SS.feedback = null;
+  renderStyle();
+}
+
+function submitOutfit() {
+  const client = STYLE_CLIENTS[SS.clientIdx % STYLE_CLIENTS.length];
+  const slots = client.requiredTypes;
+  let allCorrect = true;
+  let wrongItems = [];
+  slots.forEach(s => {
+    const sel = SS.selected[s];
+    if (!sel) { allCorrect=false; return; }
+    if (!(client.correct[s]||[]).includes(sel.name)) { allCorrect=false; wrongItems.push(sel.name); }
+  });
+
+  if (allCorrect) {
+    SS.score += 100;
+    SS.feedback = {type:"success",msg:`✓ Perfect outfit! +100 points — ${client.tip}`};
+    setTimeout(() => {
+      SS.round++; SS.clientIdx++;
+      if (SS.round>4) SS.phase="result";
+      SS.selected={}; SS.feedback=null;
+      renderStyle();
+    }, 2400);
+  } else {
+    SS.score = Math.max(0, SS.score-20);
+    SS.feedback = {type:"error",msg:`✗ Not quite — ${wrongItems.length>0?wrongItems.join(" and ")+" don't suit this occasion.":"Check your choices against the brief."} −20 points.`};
+  }
+  renderStyle();
+}
+
+function renderStyleResult(el) {
+  const pct = Math.round((SS.score/400)*100);
+  const stars = pct>=90?"⭐⭐⭐":pct>=65?"⭐⭐":"⭐";
+  const title = pct>=90?"Impeccable taste!":pct>=65?"Good eye!":"Keep styling!";
+  const sub = pct>=90?"Your clients left looking exactly right for every occasion.":pct>=65?"Mostly spot-on — a few choices missed the brief.":"Occasion dressing takes practice. Study the tips and try again.";
+  el.innerHTML = `<div class="result-screen pop">
+    <div class="result-icon">👗</div>
+    <div class="result-title">${title}</div>
+    <div class="result-stars">${stars}</div>
+    <div class="result-sub">Final score: <strong>${SS.score} / 400</strong> (${pct}%) — ${sub}</div>
+    <button class="btn btn-primary" onclick="resetStyle()">Play again</button>
+  </div>`;
+}
+
+function resetStyle() {
+  SS = {clientIdx:0,selected:{},score:0,round:1,feedback:null,phase:"play"};
+  renderStyle();
+}
+
+function renderTailor() {
+  const el = document.getElementById("tailor-main");
+  if (TS.phase==="result") { renderTailorResult(el); return; }
+  if (TS.phase==="intro") { renderTailorIntro(el); return; }
+  renderTailorPlay(el);
+}
+
+function renderTailorIntro(el) {
+  el.innerHTML = `<div style="margin-bottom:1.25rem;">
+    <div class="level-badge"><i class="ti ti-sparkles"></i> Level ${TS.level} Tailor</div>
+    <div class="xp-bar-wrap"><div class="xp-bar" style="width:${Math.min(100,TS.xp)}%"></div></div>
+    <div style="font-size:11px;color:var(--text3);margin-top:2px;">${TS.xp} / 100 XP to next level · Score: ${TS.score}</div>
+  </div>
+  ${TAILOR_CLIENTS.map((c,i)=>{
+    const done=i<TS.clientIdx, active=i===TS.clientIdx, locked=i>TS.clientIdx;
+    return `<div class="tailor-card" style="opacity:${locked?0.45:1};">
+      <div class="client-header">
+        <span style="font-size:30px;">${c.avatar}</span>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+            <span style="font-size:15px;font-weight:600;color:var(--text);">${c.name}</span>
+            <span class="diff-dot ${c.diffClass}"></span>
+            <span style="font-size:11px;color:var(--text3);">${c.difficulty}</span>
+          </div>
+          <div style="font-size:12px;color:var(--text2);">${c.garment} · ${c.tasks.length} tasks</div>
+        </div>
+        ${done?'<i class="ti ti-circle-check-filled" style="font-size:20px;color:var(--green);"></i>':''}
+        ${locked?'<i class="ti ti-lock" style="font-size:16px;color:var(--text3);"></i>':''}
+      </div>
+      ${active?`<button class="btn btn-primary" style="width:100%;" onclick="startTailor()">Start alteration <i class="ti ti-arrow-right"></i></button>`:''}
+    </div>`;
+  }).join("")}`;
+}
+
+function startTailor() {
+  TS.phase="play"; TS.checked={};
+  TS.timerLeft = TS.clientIdx===0?90:TS.clientIdx===1?70:55;
+  TS.timerMax = TS.timerLeft; TS.tool=null;
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    TS.timerLeft--;
+    if (TS.timerLeft<=0) { clearInterval(timerInterval); TS.timerLeft=0; TS.phase="result"; }
+    renderTailor();
+  },1000);
+  renderTailor();
+}
+
+function renderTailorPlay(el) {
+  const client = TAILOR_CLIENTS[TS.clientIdx];
+  const pct = Math.round((TS.timerLeft/TS.timerMax)*100);
+  const barColor = pct>50?"var(--purple)":pct>25?"var(--amber)":"var(--red)";
+  const checkedCount = Object.values(TS.checked).filter(Boolean).length;
+  const earnedPts = client.tasks.filter(t=>TS.checked[t.id]).reduce((a,t)=>a+t.pts,0);
+  const tools = [{id:"tape",icon:"ti-ruler",name:"Tape measure"},{id:"pins",icon:"ti-needle-thread",name:"Pins"},{id:"chalk",icon:"ti-pencil",name:"Chalk marker"},{id:"iron",icon:"ti-ironing",name:"Steam iron"}];
+  const activeTool = tools.find(t=>t.id===TS.tool);
+
+  el.innerHTML = `<div class="stat-row">
+    <div class="stat-card"><div class="stat-label">Time left</div><div class="stat-value" style="color:${pct<=25?'var(--red)':'var(--text)'};">${TS.timerLeft}s</div></div>
+    <div class="stat-card"><div class="stat-label">Tasks done</div><div class="stat-value">${checkedCount} / ${client.tasks.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Points</div><div class="stat-value">${TS.score+earnedPts}</div></div>
+  </div>
+  <div class="timer-bar-wrap"><div class="timer-bar" style="width:${pct}%;background:${barColor};"></div></div>
+  <div class="mannequin-area">
+    <div style="font-size:56px;margin-bottom:8px;">${client.avatar}</div>
+    <div style="font-size:15px;font-weight:600;color:var(--text);">${client.name}</div>
+    <div style="font-size:12px;color:var(--text2);margin-top:2px;">${client.garment}</div>
+    ${activeTool?`<div style="margin-top:10px;font-size:12px;color:var(--purple);font-weight:500;"><i class="ti ${activeTool.icon}" style="font-size:14px;"></i> Using: ${activeTool.name}</div>`:`<div style="margin-top:10px;font-size:12px;color:var(--text3);">Select a tool below</div>`}
+  </div>
+  <div class="section-label">Tools</div>
+  <div class="tool-grid">
+    ${tools.map(t=>`<div class="tool-btn ${TS.tool===t.id?'active-tool':''}" onclick="selectTool('${t.id}')">
+      <div class="tool-icon"><i class="ti ${t.icon}"></i></div>
+      <div class="tool-name">${t.name}</div>
+    </div>`).join("")}
+  </div>
+  <div class="section-label">Alteration checklist</div>
+  <div class="tailor-card">
+    <ul class="task-list">
+      ${client.tasks.map(t=>{
+        const done=TS.checked[t.id];
+        return `<li class="task-item">
+          <div class="task-check ${done?'done':''}" onclick="checkTask('${t.id}')">
+            ${done?'<i class="ti ti-check" style="font-size:12px;"></i>':''}
+          </div>
+          <span class="task-text ${done?'done':''}">${t.text}</span>
+          <span class="task-pts">+${t.pts}pt</span>
+        </li>`;
+      }).join("")}
+    </ul>
+  </div>
+  ${checkedCount===client.tasks.length?`<button class="btn btn-primary" style="width:100%;" onclick="completeClient()">Deliver to client <i class="ti ti-arrow-right"></i></button>`:''}`;
+}
+
+function selectTool(id) { TS.tool=id; renderTailor(); }
+function checkTask(id) { TS.checked[id]=!TS.checked[id]; renderTailor(); }
+
+function completeClient() {
+  if (timerInterval) clearInterval(timerInterval);
+  const client = TAILOR_CLIENTS[TS.clientIdx];
+  const earned = client.tasks.filter(t=>TS.checked[t.id]).reduce((a,t)=>a+t.pts,0);
+  const bonus = TS.timerLeft>30?50:TS.timerLeft>10?20:0;
+  TS.score += earned+bonus;
+  TS.xp += Math.round((earned/client.tasks.reduce((a,t)=>a+t.pts,0))*40);
+  if (TS.xp>=100){TS.level++;TS.xp-=100;}
+  TS.clientIdx++;
+  TS.phase = TS.clientIdx>=TAILOR_CLIENTS.length?"result":"intro";
+  renderTailor();
+}
+
+function renderTailorResult(el) {
+  const maxPts = TAILOR_CLIENTS.reduce((a,c)=>a+c.tasks.reduce((b,t)=>b+t.pts,0),0)+150;
+  const pct = Math.round((TS.score/maxPts)*100);
+  const stars = pct>=85?"⭐⭐⭐":pct>=55?"⭐⭐":"⭐";
+  const title = pct>=85?"Master Tailor!":pct>=55?"Skilled Craftsperson!":"Apprentice";
+  const sub = pct>=85?"Flawless alterations, on time, every client satisfied.":pct>=55?"Solid work — some tasks missed or time ran short.":"Keep practising — every stitch teaches you something.";
+  el.innerHTML = `<div class="result-screen pop">
+    <div class="result-icon">✂️</div>
+    <div class="result-title">${title}</div>
+    <div class="result-stars">${stars}</div>
+    <div class="level-badge" style="margin:0 auto 1rem;display:inline-flex;"><i class="ti ti-sparkles"></i> Level ${TS.level} Tailor</div>
+    <div class="result-sub" style="margin-top:0.75rem;">Score: <strong>${TS.score}</strong> — ${sub}</div>
+    <button class="btn btn-primary" onclick="resetTailor()" style="margin-top:1.25rem;">Play again</button>
+  </div>`;
+}
+
+function resetTailor() {
+  if (timerInterval) clearInterval(timerInterval);
+  TS={clientIdx:0,checked:{},score:0,xp:0,level:1,timerLeft:90,timerMax:90,phase:"intro",tool:null};
+  renderTailor();
+}
+
+renderStyle();
+</script>
+</body>
+</html>

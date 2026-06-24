@@ -9,34 +9,30 @@
 ## 🎮 Games
 
 ### 1. Style the Client
-Build the perfect outfit for a client based on their occasion brief. Choose the right garments across all outfit slots — top, bottom, shoes, and accessories — guided by the client's event, dress code, and personality. Earn points for correct choices. Lose points for mismatches.
+Build the perfect outfit for a client based on their occasion brief. Choose garments across all outfit slots — guided by the client's event, dress code, and personality.
 
-**Occasions covered:**
-- Garden wedding (Ikoyi)
-- Finance job interview (Victoria Island)
-- Beach party (Elegushi)
-- Aso-ebi traditional ceremony
-- Corporate dinner (Eko Hotel)
-- Creative industry networking event
-- Church service (smart-casual)
-- Black-tie gala
+**Occasions:** Garden wedding · Finance interview · Beach party · Aso-ebi ceremony · Corporate dinner · Creative networking · Church service · Black-tie gala
 
 ---
 
 ### 2. Tailor's Table
-Race against the clock to complete alteration checklists for real clients. Select the right tailoring tool, then tick off each task in the correct professional sequence. Earn XP, level up, and unlock harder clients.
+Race against the clock to complete alteration checklists for real clients. Select tools, tick tasks, earn XP, level up.
 
-**Clients:**
-- Mrs. Adeyemi — Ankara shift dress (Easy)
-- Mr. Okafor — 3-piece native suit (Medium)
-- Miss Ifeoma — Wedding gown (Hard)
+**Clients:** Mrs. Adeyemi (Easy) · Mr. Okafor (Medium) · Miss Ifeoma — Bride (Hard)
 
 ---
 
 ### 3. Fabric Quiz
-Identify fabrics and materials from visual clues and descriptions. Learn which fabrics suit which occasions, climates, and garment types — foundational knowledge for anyone commissioning or creating bespoke clothing.
+Identify fabrics from visual clues. Learn which materials suit which occasions, climates, and garment types.
 
-**Covers:** Aso-oke, Ankara, Chiffon, Linen, Dupioni Silk, Velvet, Organza, Cotton poplin, and more.
+**Covers:** Aso-oke · Ankara · Chiffon · Linen · Dupioni Silk · Velvet · Organza · Cotton poplin · Viscose
+
+---
+
+### 4. Measurement Challenge *(new)*
+Use a precision slider to record body measurements for bespoke commissions. Tolerance windows get tighter with difficulty. Learn the correct technique for each measurement point.
+
+**Measurements:** Bust · Inseam · Shoulder width · Waist · Back length · Hip · Sleeve length · Neck circumference
 
 ---
 
@@ -44,8 +40,7 @@ Identify fabrics and materials from visual clues and descriptions. Learn which f
 
 [Mendall Alterations](https://mendall.ng) is a Victoria Island, Lagos-based tailoring studio offering bespoke alterations, fitting services, and wardrobe consultation.
 
-- 📍 Victoria Island, Lagos
-- 📞 Available via WhatsApp
+- 📍 9b Amodu Ojikutu Street, Victoria Island, Lagos
 - 🌐 [mendall.ng](https://mendall.ng)
 
 ---
@@ -53,17 +48,16 @@ Identify fabrics and materials from visual clues and descriptions. Learn which f
 ## 🛠 Tech Stack
 
 - Vanilla HTML/CSS/JavaScript — zero dependencies, instant load
-- Google Fonts (Inter)
-- Tabler Icons CDN
+- Google Fonts (Inter) · Tabler Icons CDN
 - Fully mobile-responsive
 
 ---
 
-## 🚀 Deployment
+## 🚀 Live Site
 
-This project is deployed via GitHub Pages. Any push to `main` updates the live site.
+**[omoware.github.io/MENDROBE](https://omoware.github.io/MENDROBE)**
 
-**Live:** [omoware.github.io/MENDROBE](https://omoware.github.io/MENDROBE)
+Deployed via GitHub Pages. Any push to `main` updates the live site instantly.
 
 ---
 
@@ -71,8 +65,11 @@ This project is deployed via GitHub Pages. Any push to `main` updates the live s
 
 ```
 MENDROBE/
-├── index.html       # Main game application
-└── README.md        # This file
+├── index.html            # Main game shell + Style, Tailor, Fabric games
+├── measurement-game.js   # Measurement Challenge module
+├── 404.html              # Custom 404 page
+├── _config.yml           # Jekyll/GitHub Pages config
+└── README.md
 ```
 
 ---
